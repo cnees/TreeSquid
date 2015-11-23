@@ -1,0 +1,226 @@
+<html><head>
+	<title>TreeSquid Login</title>
+	
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+     <!-- Optional theme -->
+    <link href="https:///bootswatch.com/paper/bootstrap.min.css" rel="stylesheet" id="bs-theme-stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	
+	<script>
+	<!-- used for the login script-->
+	$('.menu-trigger a').bind('click', function() {
+
+  if ($('.menu-trigger i').hasClass('fa-bars')) {
+    $('.menu-trigger i').transition({
+      rotate: '180deg'
+    });
+    $('.menu-trigger i').removeClass('fa-bars');
+    $('.menu-trigger i').addClass('fa-times');
+
+  } else {
+    $('.menu-trigger i').transition({
+      rotate: '-180deg'
+    });
+    $('.menu-trigger i').addClass('fa-bars');
+    $('.menu-trigger i').removeClass('fa-times');
+  }
+
+  $('.menu').toggleClass('open', 200, 'easeOutQuad');
+
+});
+	</script>
+	
+	<style>
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: helvetica, sans-serif;
+  color: black;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-size: 1em;
+  line-height: 1.5em;
+  background: #454554; <!- #3099ff; -->
+}
+
+a {
+  color: black;
+}
+
+.menu a:hover {
+  opacity: 0.5;
+}
+
+.menu {
+  height: 100%;
+  width: 15%;
+  background: black;
+  position: absolute;
+  top: 0;
+  left: 0%;
+  text-align: center;
+}
+
+.open {
+  left: 0;
+}
+
+.menu ul {
+  list-style-type: none;
+  margin: 55px 0;
+  padding: 0;
+}
+
+.menu li {
+  padding: 5px 20px;
+  margin: 10px 0;
+}
+
+.menu li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu-trigger {
+  position: absolute;
+  top: 3%;
+  left: 7%;
+}
+
+.site-wrapper {
+  margin: 0 10%;
+  position: relative;
+}
+
+.header {
+  position: relative;
+  margin: 30px 0;
+  text-align: center;
+}
+
+.links {
+  margin: 0 auto;
+}
+
+.links ul {
+  list-style-type: none;
+  text-align: center;
+  padding: 0;
+}
+
+.links li {
+  display: inline-block;
+  padding: 30px 30px 0 0;
+}
+
+.links i,
+.menu-trigger i {
+  font-size: 3em;
+}
+
+.form-signin {
+  width: 15%;
+  right: 0;
+  position: absolute;
+  padding: 0px;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+  color: black;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+  color: black;
+}
+.form-signin input[type="user name"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.button{
+	display:block;
+	width:300px;
+	height:300px;
+	border-radius:150px;
+	font-size:180px;
+	color:#fff;
+	line-height:300px;
+	text-align:center;
+	margin: 0px auto;
+	margin-top: 200px;
+	background:#000
+}
+
+.btn-lg {
+	background: black;
+}
+	</style>
+	</head>
+	<body>
+
+    <div class="container">
+
+      <form class="form-signin">
+        <label for="inputUsername" class="sr-only">User name</label>
+        <input type="user name" id="userName" class="form-control" placeholder="User Name" required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" value="remember-me"> Remember me
+          </label>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      </form>
+
+    </div> <!-- /container -->
+	
+	<a href="#" class="button">+</a>
+	
+	<div class="menu">
+  <ul>
+    <li><a href="">Home</a>
+    </li>
+    <li><a href="">About</a>
+    </li>
+    <li><a href="">Click Bait</a>
+    </li>
+  </ul>
+</div>
+<div class="site-wrapper">
+  <div class="header">
+    <div class="menu-trigger"><a href="#"><i class="fa fa-bars"></i></a>
+    </div>
+  </div>
+</div>
+	
+	
+
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+	</body></html>
