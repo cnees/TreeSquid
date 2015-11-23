@@ -26,12 +26,12 @@
     position:absolute;
   }
 
-  #node_0, #node_1, #node_2 {top:0px;}
-  #node_3, #node_10, #node_4 {top:120px;}
-  #node_5, #node_6, #node_7 {top:240px;}
-  #node_0, #node_3, #node_5 {left:0px;}
-  #node_1, #node_10, #node_6 {left:120px;}
-  #node_2, #node_4, #node_7 {left:240px;}
+  #node_1, #node_2, #node_3 {top:0px;}
+  #node_4, #node_0, #node_5 {top:120px;}
+  #node_6, #node_7, #node_8 {top:240px;}
+  #node_1, #node_4, #node_6 {left:0px;}
+  #node_2, #node_0, #node_7 {left:120px;}
+  #node_3, #node_5, #node_8 {left:240px;}
 
   .node:focus {
   }
@@ -47,17 +47,14 @@
   }
 </style>
 <div id="container">
-<div class="node" id="node_10" tabindex="5">
+<div class="node" id="node_0" tabindex="5">
   {{ root.root_text }}
 </div>
 {% for reply in root.reply_set.all %}
-  <div class="node" id="node_{{ forloop.counter}}" tabindex="{{ forloop.counter}}">
+  <div class="node" id="node_{{ forloop.counter }}" tabindex="{{ forloop.counter }}">
     {{ reply.reply_text }}
   </div>
 {% endfor %}
-<div class="node" id="node_2" tabindex="3">
-  In potenti vestibulum venenatis parturient cum sit phasellus a a adipiscing luctus sociis litora porta dignissim a a lobortis eu condimentum taciti. Consectetur mauris himenaeos molestie at lobortis venenatis a dolor suspendisse mauris viverra elementum elementum pretium nostra.
-</div>
 <div class="node" id="node_3" tabindex="3">
   In potenti vestibulum venenatis parturient cum sit phasellus a a adipiscing luctus sociis litora porta dignissim a a lobortis eu condimentum taciti. Consectetur mauris himenaeos molestie at lobortis venenatis a dolor suspendisse mauris viverra elementum elementum pretium nostra.
 </div>
@@ -73,7 +70,9 @@
 <div class="node" id="node_7" tabindex="8">
   In potenti vestibulum venenatis parturient cum sit phasellus a a adipiscing luctus sociis litora porta dignissim a a lobortis eu condimentum taciti. Consectetur mauris himenaeos molestie at lobortis venenatis a dolor suspendisse mauris viverra elementum elementum pretium nostra.
 </div>
-
+<div class="node" id="node_8" tabindex="9">
+  In potenti vestibulum venenatis parturient cum sit phasellus a a adipiscing luctus sociis litora porta dignissim a a lobortis eu condimentum taciti. Consectetur mauris himenaeos molestie at lobortis venenatis a dolor suspendisse mauris viverra elementum elementum pretium nostra.
+</div>
 </div>
 <script>
 function expand(elt) {
