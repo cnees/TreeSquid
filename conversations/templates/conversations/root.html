@@ -1,0 +1,6 @@
+<h1>{{ root.root_text }}</h1>
+<ul>
+{% for reply in root.reply_set.all %}
+    <li>{{ reply.reply_text }}</li>
+{% endfor %}
+</ul>

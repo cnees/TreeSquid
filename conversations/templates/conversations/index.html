@@ -1,0 +1,9 @@
+{% if latest_root_list %}
+    <ul>
+    {% for root in latest_root_list %}
+        <li><a href="{% url 'conversations:root' root.id %}">{{ root.root_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No conversations are available.</p>
+{% endif %}
