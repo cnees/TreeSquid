@@ -12,9 +12,10 @@ How to run locally
   - Download, install, and setup Postgres: http://www.postgresql.org/download/.
   - Connect to Postgres, ```sudo su - postgres``` 
   - Create a new database with any name you like, ```createdb dbname``` 
-  - Create a new user with any name you like, ```createuser username``` 
+  - Create a new user with any name you like, ```createuser username -P``` 
   - To grant the user access to the database, first enter the Postgres CLI with ```psql```, then run  
   ```GRANT ALL PRIVILEGES ON DATABASE mydb TO myuser;```
 3.  Create local_settings.py
+working on it ...
 
 
