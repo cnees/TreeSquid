@@ -17,6 +17,7 @@ How to run locally
   ```GRANT ALL PRIVILEGES ON DATABASE mydb TO myuser;```
 3.  Create local_settings.py  
   - The settings.py file is configured to work on Herkoku. To run the project locally, you'll need to add a local_settings.py file in ```treesquid/```. This file is already ingnored by the .gitignore file, and is already set to be imported at the end of the ```treesquid/settings.py``` file.  
+  - Create a new SECRET_KEY with this webapp: http://www.miniwebtool.com/django-secret-key-generator/. You'll use it in the next step.
   - In the new file, you'll need to add the following ...  
     ```python
     DEBUG = True
