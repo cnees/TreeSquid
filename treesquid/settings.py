@@ -74,6 +74,12 @@ TEMPLATES = [
 WSGI_APPLICATION = 'treesquid.wsgi.application'
 
 
+# TODO: make this work better
+# if os.environ['TREESQUID_ENV'] == 'Heroku':
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# DATABASES['default'] =  dj_database_url.config()
+DATABASES = { 'default': dj_database_url.config() }
+
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
 
@@ -89,10 +95,6 @@ DATABASES = {
     }
 }
 
-# TODO: make this work better
-if os.environ['TREESQUID_ENV'] == 'Heroku':
-    DATABASES['default'] =  dj_database_url.config()
-    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
@@ -118,3 +120,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+try:
+    from local_settings import *
+except ImportError:
+    pass

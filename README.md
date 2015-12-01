@@ -15,7 +15,6 @@ How to run locally
   - Create a new user with any name you like, ```createuser username -P``` 
   - To grant the user access to the database, first enter the Postgres CLI with ```psql```, then run  
   ```GRANT ALL PRIVILEGES ON DATABASE mydb TO myuser;```
-3.  Create local_settings.py
-working on it ...
-
+3.  Create local_settings.py  
+  - The settings.py file is configured to work on Herkoku. To run the project locally, you'll need to add a local_settings.py file. 
 
