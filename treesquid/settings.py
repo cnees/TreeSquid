@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 import dj_database_url
+from getenv import env
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -22,7 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = '51a=shs_t4%8819)9n%vne%t2m$#8n2+)20jboawnj70j&4(0t'
-SECRET_KEY = os.environ['TREESQUID_SECRET_KEY']
+# SECRET_KEY = os.environ['TREESQUID_SECRET_KEY']
+SECRET_KEY = env("TREESQUID_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
