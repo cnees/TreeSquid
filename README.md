@@ -17,23 +17,22 @@ How to run locally
   ```GRANT ALL PRIVILEGES ON DATABASE mydb TO myuser;```
 3.  Create local_settings.py  
   - The settings.py file is configured to work on Herkoku. To run the project locally, you'll need to add a local_settings.py file in ```treesquid/```. This file is already ingnored by the .gitignore file, and is already set to be imported at the end of the ```treesquid/settings.py``` file.  
-  - In the new file, you'll need to add the following ...
-
-```python
-DEBUG = True
-SECRET_KEY = '51a=shs_t4%8819)9n%vne%t2m$#8n2+)20jboawnj70j&4(0t'
-
-DATABASES = {
-  'default': {
-    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    'NAME': 'your_db_name',                      
-    'USER': 'your_user_name',
-    'PASSWORD': 'your_password',
-    'HOST': 'localhost',
-    'PORT': '',
-  }
-}
-```
-  Replace the NAME, USER, and PASSWORD fields with your own values.
-4.  Run the project locally
-  
+  - In the new file, you'll need to add the following ...  
+    ```python
+    DEBUG = True
+    SECRET_KEY = '51a=shs_t4%8819)9n%vne%t2m$#8n2+)20jboawnj70j&4(0t'
+    
+    DATABASES = {
+      'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'your_db_name',                      
+        'USER': 'your_user_name',
+        'PASSWORD': 'your_password',
+        'HOST': 'localhost',
+        'PORT': '',
+      }
+    }  
+    ```    
+  - Replace the NAME, USER, and PASSWORD fields with your own values.
+4.  Run the project
+  - To start the project, just need to run ```python manage.py runserver```.
