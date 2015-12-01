@@ -20,7 +20,7 @@ How to run locally
   - In the new file, you'll need to add the following ...  
     ```python
     DEBUG = True
-    SECRET_KEY = '51a=shs_t4%8819)9n%vne%t2m$#8n2+)20jboawnj70j&4(0t'
+    SECRET_KEY = 'your secret key'
     
     DATABASES = {
       'default': {
@@ -33,6 +33,6 @@ How to run locally
       }
     }  
     ```    
-  - Replace the NAME, USER, and PASSWORD fields with your own values.
+  - Replace the SECRET_KEY, NAME, USER, and PASSWORD fields with your own values.
 4.  Run the project
   - To start the project, just need to run ```python manage.py runserver```.
