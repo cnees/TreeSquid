@@ -7,7 +7,7 @@ How to run locally
   - Install pip with following this guide: http://pip.readthedocs.org/en/stable/installing/.  
   - Install virtualenv: https://virtualenv.readthedocs.org/en/latest/installation.html.
   - In the root directory, TreeSquid, run ```virtualenv venv```. This will create a new directory within TreeSquid that's ingored with in .gitnore file. Connect to this virtual environment by running ```source venv/bin/activate```. You'll need to do this anytime you want to run Django code. To disconnect with the virtual environment, run ```deactivate```.
-  - To install the required Django utilities, run ```pip install django-toolbelt```.
+  - To install the required Django utilities, run ```pip install -r requirements.txt```.
 2.  Setup local Postgres DB for TreeSquid 
   - Download, install, and setup Postgres: http://www.postgresql.org/download/.
   - Connect to Postgres, ```sudo su - postgres``` 
@@ -16,5 +16,24 @@ How to run locally
   - To grant the user access to the database, first enter the Postgres CLI with ```psql```, then run  
   ```GRANT ALL PRIVILEGES ON DATABASE mydb TO myuser;```
 3.  Create local_settings.py  
-  - The settings.py file is configured to work on Herkoku. To run the project locally, you'll need to add a local_settings.py file. 
+  - The settings.py file is configured to work on Herkoku. To run the project locally, you'll need to add a local_settings.py file in ```treesquid/```. This file is already ingnored by the .gitignore file, and is already set to be imported at the end of the ```treesquid/settings.py``` file.  
+  - In the new file, you'll need to add the following ...
 
+```python
+DEBUG = True
+SECRET_KEY = '51a=shs_t4%8819)9n%vne%t2m$#8n2+)20jboawnj70j&4(0t'
+
+DATABASES = {
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME': 'your_db_name',                      
+    'USER': 'your_user_name',
+    'PASSWORD': 'your_password',
+    'HOST': 'localhost',
+    'PORT': '',
+  }
+}
+```
+  Replace the NAME, USER, and PASSWORD fields with your own values.
+4.  Run the project locally
+  
