@@ -48,11 +48,11 @@
 </style>
 <div id="container">
 <div class="node" id="node_0" tabindex="5">
-  {{ root.root_text }}
+  {{ root.text }}
 </div>
-{% for reply in root.reply_set.all %}
+{% for reply in root.message_set.all %}
   <div class="node" id="node_{{ forloop.counter }}" tabindex="{{ forloop.counter }}">
-    {{ reply.reply_text }}
+    {{ reply.text }}
   </div>
 {% endfor %}
 <div class="node" id="node_3" tabindex="3">
