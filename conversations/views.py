@@ -24,3 +24,7 @@ def index(request):
 def root(request, root_id):
 	root = get_object_or_404(Message, pk=root_id)
 	return render(request, 'conversations/root.html', {'root': root})
+
+def replies(request, root_id):
+    response = "You're looking at the replies of root %s."
+    return HttpResponse(response % root_id)
