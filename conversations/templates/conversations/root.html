@@ -51,11 +51,11 @@
 <div id="cy" style="border:1px solid #f00;position:fixed;top:0px;right:0px;width:500px;height:500px;">&nbsp;</div>
 <div id="container">
 <div class="node" id="node_0" tabindex="5">
-  {{ root.root_text }}
+  {{ root.text }}
 </div>
-{% for reply in root.reply_set.all %}
+{% for reply in root.message_set.all %}
   <div class="node" id="node_{{ forloop.counter }}" tabindex="{{ forloop.counter }}">
-    {{ reply.reply_text }}
+    {{ reply.text }}
   </div>
 {% endfor %}
 </div>
