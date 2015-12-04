@@ -38,8 +38,7 @@ $(function(){
     ],
 
     layout: {
-      name: 'grid',
-      rows: 1
+      name: 'cose'
     },
 
     headless: false,
@@ -53,10 +52,24 @@ $(function(){
     pixelRatio: 1
   });
 
-  cy.add({
-      group: "nodes",
-      data: { weight: 75 },
-      position: { x: 200, y: 200 }
+  cy.nodes().forEach(function(n){
+    n.qtip({
+      content: [
+        n.data('text'),
+        "<form><input><br><button type='submit'>Reply</button></form>"
+      ],
+      position: {
+        my: 'top center',
+        at: 'bottom center'
+      },
+      style: {
+        classes: 'qtip-bootstrap',
+        tip: {
+          width: 16,
+          height: 8
+        }
+      }
+    });
   });
 
   cy.onRender(handler = function(){
