@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, render
+from django.db.models import F
 
 from .models import Message
 # from .models import Root
@@ -17,7 +18,7 @@ from .models import Message
 #     return HttpResponse(response % root_id)
 
 def index(request):
-	latest_root_list = Message.objects.exclude(parent=True).order_by('-last_modified')[:5]
+	latest_root_list = Message.objects.filter(root_id=F('id')).order_by('-last_modified')[:5]
 	context = {'latest_root_list': latest_root_list}
 	return render(request, 'conversations/index.html', context)
 
