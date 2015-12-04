@@ -1,3 +1,5 @@
+{% load staticfiles %}
+
 <style>
   #container {
     background:url('http://i82.photobucket.com/albums/j279/qazfan/x_1.png') no-repeat center;
@@ -46,6 +48,7 @@
     left:30px!important;
   }
 </style>
+<div id="cy" style="border:1px solid #f00;position:fixed;top:0px;right:0px;width:500px;height:500px;">&nbsp;</div>
 <div id="container">
 <div class="node" id="node_0" tabindex="5">
   {{ root.root_text }}
@@ -55,37 +58,26 @@
     {{ reply.reply_text }}
   </div>
 {% endfor %}
-<div class="node" id="node_3" tabindex="3">
-  In potenti vestibulum venenatis parturient cum sit phasellus a a adipiscing luctus sociis litora porta dignissim a a lobortis eu condimentum taciti. Consectetur mauris himenaeos molestie at lobortis venenatis a dolor suspendisse mauris viverra elementum elementum pretium nostra.
 </div>
-<div class="node" id="node_4" tabindex="4">
-  In potenti vestibulum venenatis parturient cum sit phasellus a a adipiscing luctus sociis litora porta dignissim a a lobortis eu condimentum taciti. Consectetur mauris himenaeos molestie at lobortis venenatis a dolor suspendisse mauris viverra elementum elementum pretium nostra.
-</div>
-<div class="node" id="node_5" tabindex="6">
-  In potenti vestibulum venenatis parturient cum sit phasellus a a adipiscing luctus sociis litora porta dignissim a a lobortis eu condimentum taciti. Consectetur mauris himenaeos molestie at lobortis venenatis a dolor suspendisse mauris viverra elementum elementum pretium nostra.
-</div>
-<div class="node" id="node_6" tabindex="7">
-  In potenti vestibulum venenatis parturient cum sit phasellus a a adipiscing luctus sociis litora porta dignissim a a lobortis eu condimentum taciti. Consectetur mauris himenaeos molestie at lobortis venenatis a dolor suspendisse mauris viverra elementum elementum pretium nostra.
-</div>
-<div class="node" id="node_7" tabindex="8">
-  In potenti vestibulum venenatis parturient cum sit phasellus a a adipiscing luctus sociis litora porta dignissim a a lobortis eu condimentum taciti. Consectetur mauris himenaeos molestie at lobortis venenatis a dolor suspendisse mauris viverra elementum elementum pretium nostra.
-</div>
-<div class="node" id="node_8" tabindex="9">
-  In potenti vestibulum venenatis parturient cum sit phasellus a a adipiscing luctus sociis litora porta dignissim a a lobortis eu condimentum taciti. Consectetur mauris himenaeos molestie at lobortis venenatis a dolor suspendisse mauris viverra elementum elementum pretium nostra.
-</div>
-</div>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-function expand(elt) {
-  console.log('test');$(this).addClass("node-focus", 150);
-}
-
-function contract() {
-  $(this).removeClass("node-focus", 150);
-}
-
-$(function(){
-  $(".node").focus(expand);
-  $(".node").blur(contract);
-});
+  // Watch out, global variable.
+  var GRAPH_ELEMENTS = [ // list of graph elements to start with
+    { // node a
+      data: { id: '{{ root.root_text }}' }
+    },
+    {% for reply in root.reply_set.all %}
+      {
+        data: {
+          id: '{{ reply.id }}',
+          label: '{{ reply.reply_text }}'
+        }
+      },
+    {% endfor %}
+    { // edge ab
+      data: { id: 'ab', source: 'a', target: 'b' }
+    }
+  ]
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="{% static 'conversations/cytoscape.js' %}"></script>
+<script src="{% static 'conversations/index.js' %}"></script>

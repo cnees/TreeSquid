@@ -1,5 +1,3 @@
-var cytoscape = require('cytoscape');
-
 function expand(elt) {
   console.log('test');$(this).addClass("node-focus", 150);
 }
@@ -17,17 +15,7 @@ $(function(){
 
     container: document.getElementById('cy'), // container to render in
 
-    elements: [ // list of graph elements to start with
-      { // node a
-        data: { id: '{{ root.root_text }}' }
-      },
-      { // node b
-        data: { id: 'b' }
-      },
-      { // edge ab
-        data: { id: 'ab', source: 'a', target: 'b' }
-      },
-    ],
+    elements: GRAPH_ELEMENTS,
 
     style: [ // the stylesheet for the graph
       {
