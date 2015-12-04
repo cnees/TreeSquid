@@ -56,7 +56,7 @@
 <div class="node" id="node_0" tabindex="5">
   {{ root.text }}
 </div>
-{% for reply in root.message_set.all %}
+{% for reply in root.children.all %}
   <div class="node" id="node_{{ forloop.counter }}" tabindex="{{ forloop.counter }}">
     {{ reply.text }}
   </div>
@@ -77,7 +77,7 @@
         text: '{{ root.text }}'
       }
     },
-    {% for reply in root.message_set.all %}
+    {% for reply in root.descendants.all %}
       {
         data: {
           id: '{{ reply.id }}',

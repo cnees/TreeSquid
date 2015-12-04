@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class Message(models.Model):
 	user = models.ForeignKey(User)
 	parent = models.ForeignKey('Message', null=True, related_name="children")
-	root = models.ForeignKey('Message', null=True, related_name="decendents", related_query_name="children_of")
+	root = models.ForeignKey('Message', null=True, related_name="descendants", related_query_name="children_of")
 	text = models.CharField('message text', max_length=5000)
 	created = models.DateTimeField('created', auto_now_add=True)
 	last_modified = models.DateTimeField('last modified', auto_now=True)
