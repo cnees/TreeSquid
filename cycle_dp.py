@@ -39,3 +39,6 @@ m5 = Message(text="Another descendant of root 1", user=user2, parent=m3)
 m5.save()
 m6 = Message(text="Yet another descendant of root 1", user=user2, parent=m2)
 m6.save()
+
+m7 = Message(text="ROOT2", user=user4)
+m7.save()
