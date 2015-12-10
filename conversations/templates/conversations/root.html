@@ -92,14 +92,14 @@
     { // node a
       data: {
         id: '{{ root.id }}',
-        text: '{{ root.text }}'
+        text: "{{ root.text }}"
       }
     },
     {% for reply in root.descendants.all %}
       {
         data: {
           id: '{{ reply.id }}',
-          text: '{{ reply.text }}'
+          text: "{{ reply.text|safe }}"
         },
         classes: 'user_0'
       },

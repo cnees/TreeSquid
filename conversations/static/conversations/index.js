@@ -35,7 +35,7 @@ function setQTip(n) {
 
 $(function() {
 
-  var addReply = function(data, cy){
+  var addReply = function(e, data, cy){
     console.log(data['text']);
     var n = cy.add({
       group: "nodes",
@@ -43,16 +43,15 @@ $(function() {
         id: data['id'],
         text: data['text']
       },
-      position: { x: 200, y: 200 }
+      renderedPosition: {x: e.clientX + 150, y: e.clientY}
     });
     cy.add({ // edge
       data: { id: data['parent_id'] + "_" + data['id'], source: data['parent_id'], target: data['id'] }
     });
     setQTip(n);
-    cy.layout({name: 'cose'});
   }
 
-  var replyToRoot = function(e) {
+  var replyToMessage = function(e) {
     var textBox = $(e.target).parent().find("textarea:first");
     $("div").qtip("hide");
     data = {
@@ -61,11 +60,11 @@ $(function() {
         'csrfmiddlewaretoken': csrf_,
     };
     $.post("/conversation/1/reply/", data, function(data){
-      addReply(data['content'], cy);
+      addReply(e, data['content'], cy);
     }, 'json');
   }
 
-  $("body").on('click', '.reply-button', function(e) {replyToRoot(e);});
+  $("body").on('click', '.reply-button', function(e) {replyToMessage(e);});
 
   $(".node").focus(expand);
   $(".node").blur(contract);
