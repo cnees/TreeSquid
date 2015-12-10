@@ -6,24 +6,42 @@ function contract() {
   $(this).removeClass("node-focus", 150);
 }
 
-$(document).ready(function() {
+// var csrf = "";
+
+$(function() {
+
+  var addReply = function(a){
+    var span = "<br/><span>" + a['content']['reply'] + "</span>"
+    $("#replyDiv").append(span);
+  }
+
   var replytoroot = function() {
-    $.ajax({
-      type: "GET",
-      url: "/conversation/1/reply/",
-      data: {
-        'node': 1
-      },
-    }).done(function(a){
-      var span = "<br/><span>" + a['content']['reply'] + "</span>"
-      $("#replyDiv").append(span);
-    });
+    // alert(csrf_);
+    data = {
+        'node': 1,
+        'message': "I'm a new message. Hello to you",
+        'csrfmiddlewaretoken': csrf_,
+    };
+    $.post("/conversation/1/reply/", data, function(data){
+      addReply(data);
+    }, 'json');
+    // $.ajax({
+    //   type: "POST",
+    //   url: "/conversation/1/reply/",
+    //   // contentType: false,
+    //   data: {
+    //     csrfmiddlewaretoken: csrf_,
+    //     'node': 1,
+    //     'message': "I'm a new message. Hello to you",
+    //   },
+    // }).done(function(a){
+      
+    // });
   }
 
   $("#reply").click(replytoroot);
-});
 
-$(function(){
+
   console.log("Document ready");
   $(".node").focus(expand);
   $(".node").blur(contract);

@@ -3,6 +3,7 @@ from django.db.models import F
 from django_ajax.decorators import ajax
 
 from .models import Message
+import json
 # from .models import Root
 
 # def index(request):
@@ -28,7 +29,14 @@ def root(request, root_id):
 	return render(request, 'conversations/root.html', {'root': root})
 
 @ajax
-def replies(request, root_id):
-    response = "You're looking at the replies of root %s."
-    data = ""
-    return {'reply': 'asfd'}
+def reply(request, root_id):
+	import urlparse
+	parse = urlparse.parse_qs(request.body)
+	node = parse['node'][0]
+	message = parse['message'][0]
+	print node
+	print message
+	parent = Message.objects.get(id=node)
+	reply = Message(text=message, parent=parent, root=parent.root)
+
+	return {'id': reply.id, 'text': reply.text, 'parent_id': parent.id}
