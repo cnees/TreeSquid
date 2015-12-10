@@ -40,8 +40,7 @@ def add_reply(request, root_id):
 		print message
 		parent = Message.objects.get(id=node)
 		# user_id = request.user.id
-		# reply = Message(text=message, parent=parent, root=parent.root, user_id=user_id)
-		reply = Message(text=message.replace('"', "''"), parent=parent, root=parent.root, user_id=1)
+		reply = Message(text=json.dumps(message)[1:-1].replace('\\"', "''"), parent=parent, root=parent.root, user_id=1)
 		reply.save()
 		print reply
 		return {'id': reply.id, 'text': reply.text, 'parent_id': parent.id}
