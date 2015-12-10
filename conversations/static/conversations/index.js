@@ -1,48 +1,64 @@
 function expand(elt) {
-  console.log('test');$(this).addClass("node-focus", 150);
+  $(this).addClass("node-focus", 150);
 }
 
 function contract() {
   $(this).removeClass("node-focus", 150);
 }
 
-// var csrf = "";
+function setQTip(n) {
+  n.qtip({
+    content: [
+      n.data('text'),
+      "<br><input data-id='" + n.data("id") + "'><br><button class='reply-button' id='reply_" + n.data("id") + "'>Reply</button>"
+    ],
+    position: {
+      my: 'top center',
+      at: 'bottom center'
+    },
+    style: {
+      classes: 'qtip-bootstrap',
+      tip: {
+        width: 16,
+        height: 8
+      }
+    }
+  });
+}
 
 $(function() {
 
-  var addReply = function(a){
-    var span = "<br/><span>" + a['content']['reply'] + "</span>"
-    $("#replyDiv").append(span);
+  var addReply = function(data, cy){
+    console.log(data['text']);
+    var n = cy.add({
+      group: "nodes",
+      data: {
+        id: data['id'],
+        text: data['text']
+      },
+      position: { x: 200, y: 200 }
+    });
+    cy.add({ // edge
+      data: { id: data['parent_id'] + "_" + data['id'], source: data['parent_id'], target: data['id'] }
+    });
+    setQTip(n);
   }
 
-  var replytoroot = function() {
-    // alert(csrf_);
+  var replyToRoot = function(e) {
+    var textBox = $(e.target).parent().find("input:first");
+
     data = {
-        'node': 1,
-        'message': "I'm a new message. Hello to you",
+        'node': textBox.attr("data-id"),
+        'message': textBox.val(),
         'csrfmiddlewaretoken': csrf_,
     };
     $.post("/conversation/1/reply/", data, function(data){
-      addReply(data);
+      addReply(data['content'], cy);
     }, 'json');
-    // $.ajax({
-    //   type: "POST",
-    //   url: "/conversation/1/reply/",
-    //   // contentType: false,
-    //   data: {
-    //     csrfmiddlewaretoken: csrf_,
-    //     'node': 1,
-    //     'message': "I'm a new message. Hello to you",
-    //   },
-    // }).done(function(a){
-      
-    // });
   }
 
-  $("#reply").click(replytoroot);
+  $("body").on('click', '.reply-button', function(e) {replyToRoot(e);});
 
-
-  console.log("Document ready");
   $(".node").focus(expand);
   $(".node").blur(contract);
 
@@ -88,26 +104,10 @@ $(function() {
   });
 
   cy.nodes().forEach(function(n){
-    n.qtip({
-      content: [
-        n.data('text'),
-        "<form><input><br><button type='submit' id='" + n.data("text") + "'>Reply</button></form>"
-      ],
-      position: {
-        my: 'top center',
-        at: 'bottom center'
-      },
-      style: {
-        classes: 'qtip-bootstrap',
-        tip: {
-          width: 16,
-          height: 8
-        }
-      }
-    });
+    setQTip(n);
   });
 
   cy.onRender(handler = function(){
-    console.log('frame rendered');
+    //console.log('frame rendered');
   });
 });
