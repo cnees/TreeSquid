@@ -6,12 +6,12 @@ User.objects.all().delete()
 Message.objects.all().delete()
 
 # Add a few users
-user1 = User.objects.create_user('chris', 'chris@treesquid.com', 'chrispassword')
+user1 = User.objects.create_user('chris', 'chrisloechli@gmail.com', 'chrispassword')
 user1.first_name = "Chris"
 user1.last_name = "Loechli"
 user1.save()
 
-user2 = User.objects.create_user('clara', 'clara@treesquid.com', 'clarapassword')
+user2 = User.objects.create_user('clara', 'claracc@gmail.com', 'clarapassword')
 user2.first_name = "Clara"
 user2.last_name = "Ness"
 user2.save()
