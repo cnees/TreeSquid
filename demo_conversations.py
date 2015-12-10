@@ -26,12 +26,17 @@ user4.first_name = "Brendan"
 user4.last_name = "Killalea"
 user4.save()
 
+m20 = Message(text="Hello World", user=user1)
+m20.save()
+m21 = Message(text="What's a treesquid?", user=user1)
+m21.save()
+
 # Add some messages
 m11 = Message(text="Best EECS class?", user=user4)
 m11.save()
-m12 = Message(user=user1, parent=m1, text="EECS 388 was delightful!")
+m12 = Message(user=user1, parent=m11, text="EECS 388 was delightful!")
 m12.save()
-m13 = Message(user=user3, parent=m1, text="EECS 493 is great if you like front-end / user-experience material.")
+m13 = Message(user=user3, parent=m11, text="EECS 493 is great if you like front-end / user-experience material.")
 m13.save()
 
 m1 = Message(text="Good Nerf Guns?", user=user1)
@@ -57,5 +62,4 @@ m9.save()
 m10 = Message(user=user1, parent=m1, text="I've heard good things about the Elite Rampage, thoughts?")
 m10.save()
 m10.save()
-
 
