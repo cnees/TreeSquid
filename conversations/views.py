@@ -121,6 +121,16 @@ def root(request, root_id):
     return render(request, 'conversations/root.html', {'latest_root_list': latest_root_list, 'root': root})
 
 @ajax
+def add_root(request):
+  if request.method == 'POST':
+    parse = urlparse.parse_qs(request.body)
+    message = parse['message'][0]
+    user_id = request.user.id
+    reply = Message(text=json.dumps(message)[1:-1].replace('\\"', "''"), user_id=user_id)
+    reply.save()
+    return {'id': reply.id, 'text': reply.text}
+
+@ajax
 def add_reply(request, root_id):
 	if request.method == 'POST':
 		parse = urlparse.parse_qs(request.body)

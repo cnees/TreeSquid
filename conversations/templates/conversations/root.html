@@ -1,217 +1,204 @@
 {% load staticfiles %}
 
 <style>
-html,
-body {
-  margin: 0;
-  padding: 0;
-  font-family: helvetica, sans-serif;
-  color: black;
-  height: 100%;
-  width: 100%;
-  overflow: hidden;
-  font-size: 1em;
-  line-height: 1.5em;
-  background: white; <!-#454554; #3099ff; -->
-}
-
+  html,
   body {
-    font-family: Arial, Verdana, sans-serif;
-  }
-  #container {
-    background:url('http://i82.photobucket.com/albums/j279/qazfan/x_1.png') no-repeat center;
-    width:345px;
-    height:345px;
-  }
-  .node {
-    z-index:5;
-    transition:background 0.25s;
-    width:100px;
-    height:100px;
-    box-sizing:border-box;
-    background:#ccc;
-    font-size:small;
-    font-family:sans-serif;
-    overflow:hidden;
-    padding:10px;
-    border:10px solid #ccc;
-    word-wrap: break-word;
-    border-radius:5px;
+    margin: 0;
+    padding: 0;
+    font-family: helvetica, sans-serif;
+    color: black;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    font-size: 1em;
+    line-height: 1.5em;
+    background: white; <!-#454554; #3099ff; -->
   }
 
-  #container .node {
-    display:inline-block;
-    margin:10px;
-    position:absolute;
+    body {
+      font-family: Arial, Verdana, sans-serif;
+    }
+    #container {
+      background:url('http://i82.photobucket.com/albums/j279/qazfan/x_1.png') no-repeat center;
+      width:345px;
+      height:345px;
+    }
+    .node {
+      z-index:5;
+      transition:background 0.25s;
+      width:100px;
+      height:100px;
+      box-sizing:border-box;
+      background:#ccc;
+      font-size:small;
+      font-family:sans-serif;
+      overflow:hidden;
+      padding:10px;
+      border:10px solid #ccc;
+      word-wrap: break-word;
+      border-radius:5px;
+    }
+
+    #container .node {
+      display:inline-block;
+      margin:10px;
+      position:absolute;
+    }
+
+    .node:focus {
+    }
+    .node-focus {
+      box-shadow:0 0 8px #000;
+      overflow:auto;
+      background:rgba(255,255,255,1);
+      width:260px;
+      height:260px;
+      z-index:10;
+      top:30px!important;
+      left:30px!important;
+    }
+    .user_0 {
+      background-color:#0f0!important;
+    }
+    button, textarea {
+      width:100%;
+    }
+    textarea {
+      height:80px;
+      max-width:250px;
+      margin-bottom:5px;
+    }
+    
+    a {
+    color: black;
+    text-decoration: none;
   }
 
-  .node:focus {
+  .menu a:hover {
+    opacity: 0.5;
+    text-decoration:none;
+    color:black;
   }
-  .node-focus {
-    box-shadow:0 0 8px #000;
+
+  .menu {
+    height: 100%;
+    width: 15%;
+    background: #454554;;
+    position: absolute;
+    top: 0;
+    left: 0%;
+    text-align: center;
+    margin-top:100px;
+  }
+
+  .open {
+    left: 0;
+  }
+
+
+  .menu-trigger {
+    position: absolute;
+    top: 3%;
+    left: 7%;
+  }
+
+  .site-wrapper {
+    margin: 0 10%;
+    position: relative;
+  }
+
+  .header {
+    position: relative;
+    margin: 30px 0;
+    text-align: center;
+  }
+
+  .links {
+    margin: 0 auto;
+  }
+
+  .links i,
+  .menu-trigger i {
+    font-size: 3em;
+  }
+
+  .messageBox {
+  	width: 80%;
+    padding-top:10px;
+    padding-bottom:10px;
+  	background: #4fbeff;
+    display:block;
+  	text-align: center;
+  	border: 1px;
+  	border-style: solid;
+  	border-color: #454554;
+  	margin-right:auto;
+  	margin-left:auto;
+  	text-decoration:none;
     overflow:auto;
-    background:rgba(255,255,255,1);
-    width:260px;
-    height:260px;
-    z-index:10;
-    top:30px!important;
-    left:30px!important;
+    box-sizing:border-box;
   }
-  .user_0 {
-    background-color:#0f0!important;
+  .messageBox span {
+    display:block;
   }
-  button, textarea {
-    width:100%;
+
+  .rectangle {
+  	width: 100%;
+  	height: 100px;
+  	background: #454554;
+  	margin-top: 0;
   }
-  textarea {
-    height:80px;
-    max-width:250px;
-    margin-bottom:5px;
+
+  .logo {
+  	color: #4fbeff;
+  	display:block;
+  	margin-right:auto;
+  	margin-left:auto;
+  	text-align:center;
+  	vertical-align: middle;
+  	margin-top: 0px;
+  	line-height: 150%;
   }
-  
-  a {
-  color: black;
-}
 
-.menu a:hover {
-  opacity: 0.5;
-  text-decoration:none;
-  color:black;
-}
-
-.menu {
-  height: 100%;
-  width: 15%;
-  background: #454554;;
-  position: absolute;
-  top: 0;
-  left: 0%;
-  text-align: center;
-  margin-top:100px;
-}
-
-.open {
-  left: 0;
-}
-
-
-.menu-trigger {
-  position: absolute;
-  top: 3%;
-  left: 7%;
-}
-
-.site-wrapper {
-  margin: 0 10%;
-  position: relative;
-}
-
-.header {
-  position: relative;
-  margin: 30px 0;
-  text-align: center;
-}
-
-.links {
-  margin: 0 auto;
-}
-
-.links i,
-.menu-trigger i {
-  font-size: 3em;
-}
-
-.button{
-	display:block;
-	width:80%;
-	height:10%;
-	font-size:40px;
-	color:black;
-	text-align:center;
-	margin-right:auto;
-	margin-left:auto;
-	border:2px;
-	border-color:black;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	background:#70d370;
-	line-height: 100%
-}
-
-.messageBox {
-	width: 80%;
-	height: 10%;
-	display:inline-block;
-	background: #4fbeff;
-	text-align: center;
-	vertical-align:middle;
-	border: 1px;
-	border-style: solid;
-	border-color: #454554;
-	margin-right:auto;
-	margin-left:auto;
-	text-decoration:none;
-	line-height: 560%;
-	
-}
-
-.rectangle {
-	width: 100%;
-	height: 100px;
-	background: #454554;
-	margin-top: 0;
-}
-
-.logo {
-	color: #4fbeff;
-	display:block;
-	margin-right:auto;
-	margin-left:auto;
-	text-align:center;
-	vertical-align: middle;
-	margin-top: 0px;
-	line-height: 150%;
-}
-
-.handle {
-	color: #4fbeff;
-	margin-top: 0px;
-	line-height: 0;
-	margin-left:80%;
-	position:absolute;
-	margin-top: 40px;
-}
+  .handle {
+  	color: #4fbeff;
+  	margin-top: 0px;
+  	line-height: 0;
+  	margin-left:80%;
+  	position:absolute;
+  	margin-top: 40px;
+  }
+</style>
+<style>
+  #create-root {
+    width:80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #create-root textarea, #create-root button {
+    width: 100%;
+  }
 </style>
 <div id="cy" style="position:fixed;top:0px;left:15%;width:85%;height:100%;margin-top:100px;">&nbsp;</div>
-<!--<div id="container">
-<div class="node" id="node_0" tabindex="5">
-  {{ root.text }}
-</div>
-{% for reply in root.children.all %}
-  <div class="node" id="node_{{ forloop.counter }}" tabindex="{{ forloop.counter }}">
-    {{ reply.text }}
-  </div>
-{% endfor %}
-</div>
-<div id="replyDiv">
-  <button id="reply">REPLY TO ROOT</button>
-</div>
--->
 
 <body>
 	<div class="rectangle">
 		<h3 class="handle">{{ username }}</h3>
-		<h1 class="logo">TreeSquid</h1>
+		<h1 class="logo" style="font-family:'Lobster 1.4';font-size:65px;">TreeSquid</h1>
 	</div>
 	
 	</head>
 	<body>
 	
 	<div class="menu">
-	<a href="#" class="button">New Message</a>
+	<div id="create-root">
+    <textarea id="create-root-textarea"></textarea>
+    <button id="create-root-button">New Conversation</button>
+  </div>
+  <br>
 	{% if latest_root_list %}
 		{% for root in latest_root_list %}
-			<a href="/conversation/{{root.id}}" class="messageBox">{{ root.text }}</a>
+   <a href="/conversation/{{root.id}}" class="messageBox"><span>{{ root.text }}</span></a>
     {% endfor %}
 	{% else %}
 		<p>No conversations are available.</p>
@@ -266,7 +253,13 @@ body {
     },
     {% for reply in root.descendants.all %}
       {
-        style: { 'background-color': color('{{ reply.user.id }}') },
+        style: {
+          'border-color': color({{ reply.user.id }} % colors.length),
+          
+          'border-opacity': 1,
+          'border-style': 'solid',
+          'border-width': 3
+        },
         data: {
           id: '{{ reply.id }}',
           text: "{{ reply.text|safe }}",

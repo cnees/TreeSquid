@@ -35,6 +35,17 @@ function setQTip(n) {
 
 $(function() {
 
+  $("#create-root-button").click(function(){
+    //$("#create-root-textarea").val()
+    new_root = {
+      'message': $("#create-root-textarea").val(),
+      'csrfmiddlewaretoken': csrf_,
+    }
+    $.post("/add_root/", new_root, function(data){
+      window.location.replace("/conversation/" + data['content']['id']);
+    }, 'json');
+  });
+
   var addReply = function(e, data, cy){
     console.log(data['text']);
     var n = cy.add({
