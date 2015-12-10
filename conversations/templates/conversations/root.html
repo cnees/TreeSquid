@@ -236,6 +236,27 @@ body {
     return "";
   };
 
+  // var userMap = {
+  //   {% for reply in root.descendants.all %}
+  //     '{{ reply.id }}': '{{ reply.user.id }}',
+  //   {% endfor %}
+  // }
+
+  var colors = ['red', 'blue', 'yellow', 'green', 'orange', 'pink', 'cyan', 'purple'];
+  self.userColors = {};
+  self.i = 0;
+  var color = function(userId) {
+    if (userId in self.userColors) return userColors[userId];
+    else {
+      self.userColors[userId] = colors[self.i];
+      self.i += 1;
+      if (self.i >= colors.length) {
+        console.log("We ran out of colors for the number of users. We will now repeat");
+        self.i = 0;
+      }
+    }
+  }
+
   var GRAPH_ELEMENTS = [ // list of graph elements to start with
     { // node a
       data: {
@@ -245,9 +266,10 @@ body {
     },
     {% for reply in root.descendants.all %}
       {
+        style: { 'background-color': color('{{ reply.user.id }}') },
         data: {
           id: '{{ reply.id }}',
-          text: "{{ reply.text|safe }}"
+          text: "{{ reply.text|safe }}",
         },
         classes: 'user_0'
       },
@@ -256,6 +278,7 @@ body {
       },
     {% endfor %}
   ]
+
 </script>
 <script src="{% static 'conversations/cytoscape.js' %}"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.min.js"></script>
