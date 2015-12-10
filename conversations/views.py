@@ -4,18 +4,27 @@ from django.template import RequestContext
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 from django_ajax.decorators import ajax
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import logout
 
 from conversations.forms import UserForm
 from .models import Message
 
 def index(request):
-	latest_root_list = Message.objects.filter(root_id=F('id')).order_by('-last_modified')[:5]
-	context = {'latest_root_list': latest_root_list}
-	return render(request, 'conversations/index.html', context)
+    context = {}
 
-def root(request, root_id):
-	root = get_object_or_404(Message, pk=root_id)
-	return render(request, 'conversations/root.html', {'root': root})
+    # If the user is logged on, show the conversation to which they last contributed
+    if request.user.is_authenticated():
+        latest_root_list = Message.objects.filter(root_id=F('id')).order_by('-last_modified')[:5]
+        context = {'latest_root_list': latest_root_list}
+
+        return render(request, 'conversations/index.html', context)
+
+    # Else, serve the user the welcome page
+    return render(request, 'conversations/index.html')
+
+def about(request):
+    return render(request, 'conversations/about.html')
 
 def register(request):
     # Like before, get the request's context.
@@ -83,7 +92,7 @@ def user_login(request):
                 # If the account is valid and active, we can log the user in.
                 # We'll send the user back to the homepage.
                 login(request, user)
-                return HttpResponseRedirect('/conversations/')
+                return HttpResponseRedirect('/')
             else:
                 # An inactive account was used - no logging in!
                 return HttpResponse("Your TreeSquid account is disabled.")
@@ -99,8 +108,22 @@ def user_login(request):
         # blank dictionary object...
         return render_to_response('conversations/login.html', {}, context)
 
+@login_required
+def root(request, root_id):
+	root = get_object_or_404(Message, pk=root_id)
+	return render(request, 'conversations/root.html', {'root': root})
+
 @ajax
 def replies(request, root_id):
     response = "You're looking at the replies of root %s."
     data = ""
     return {'reply': 'asfd'}
+
+# Use the login_required() decorator to ensure only those logged in can access the view.
+@login_required
+def user_logout(request):
+    # Since we know the user is logged in, we can now just log them out.
+    logout(request)
+
+    # Take the user back to the homepage.
+    return HttpResponseRedirect('/')
