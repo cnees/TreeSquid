@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404, render, render_to_response
+from django.shortcuts import get_object_or_404, render, render_to_response, redirect
 from django.db.models import F
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
@@ -22,7 +22,8 @@ def index(request):
     if request.user.is_authenticated():
         latest_root_list = Message.objects.filter(root_id=F('id')).order_by('-last_modified')[:5]
         context = {'latest_root_list': latest_root_list}
-
+        root_id = Message.objects.filter(root_id=F('id')).latest('id').id
+        # return redirect('conversation/' + str(root_id), root_id=root_id)
         return render(request, 'conversations/index.html', context)
 
     # Else, serve the user the welcome page
@@ -59,8 +60,8 @@ def register(request):
         # Invalid form - mistakes or something else?
         # Print problems to the terminal.
         # They'll also be shown to the user.
-        else:
-            print user_form.errors
+        # else:
+            # print user_form.errors
 
     # Not a HTTP POST, so we render our form using two ModelForm instances.
     # These forms will be blank, ready for user input.
@@ -103,7 +104,7 @@ def user_login(request):
                 return HttpResponse("Your TreeSquid account is disabled.")
         else:
             # Bad login details were provided. So we can't log the user in.
-            print "Invalid login details: {0}, {1}".format(username, password)
+            # print "Invalid login details: {0}, {1}".format(username, password)
             return HttpResponse("Invalid login details supplied.")
 
     # The request is not a HTTP POST, so display the login form.
@@ -115,8 +116,9 @@ def user_login(request):
 
 @login_required
 def root(request, root_id):
-	root = get_object_or_404(Message, pk=root_id)
-	return render(request, 'conversations/root.html', {'root': root})
+    root = get_object_or_404(Message, pk=root_id)
+    latest_root_list = Message.objects.filter(root_id=F('id')).order_by('-last_modified')[:5]
+    return render(request, 'conversations/root.html', {'latest_root_list': latest_root_list, 'root': root})
 
 @ajax
 def add_reply(request, root_id):
@@ -124,13 +126,13 @@ def add_reply(request, root_id):
 		parse = urlparse.parse_qs(request.body)
 		node = parse['node'][0]
 		message = parse['message'][0]
-		print node
-		print message
+		# print node
+		# print message
 		parent = Message.objects.get(id=node)
 		user_id = request.user.id
 		reply = Message(text=json.dumps(message)[1:-1].replace('\\"', "''"), parent=parent, root=parent.root, user_id=user_id)
 		reply.save()
-		print reply
+		# print reply
 		return {'id': reply.id, 'text': reply.text, 'parent_id': parent.id}
 
 # Use the login_required() decorator to ensure only those logged in can access the view.
