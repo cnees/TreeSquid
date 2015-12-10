@@ -35,5 +35,12 @@ How to run locally
     }  
     ```    
   - Replace the SECRET_KEY, NAME, USER, and PASSWORD fields with your own values.
+
+ALSO - to set up db
+python manage.py makemigrations
+python manage.py migrate
+python manage.py shell < "filename"
+
 4.  Run the project
   - To start the project, just need to run ```python manage.py runserver```.
+

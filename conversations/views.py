@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.db.models import F
+from django_ajax.decorators import ajax
 
 from .models import Message
 # from .models import Root
@@ -26,6 +27,8 @@ def root(request, root_id):
 	root = get_object_or_404(Message, pk=root_id)
 	return render(request, 'conversations/root.html', {'root': root})
 
+@ajax
 def replies(request, root_id):
     response = "You're looking at the replies of root %s."
-    return HttpResponse(response % root_id)
+    data = ""
+    return {'reply': 'asfd'}

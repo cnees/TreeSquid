@@ -6,6 +6,23 @@ function contract() {
   $(this).removeClass("node-focus", 150);
 }
 
+$(document).ready(function() {
+  var replytoroot = function() {
+    $.ajax({
+      type: "GET",
+      url: "/conversation/1/reply/",
+      data: {
+        'node': 1
+      },
+    }).done(function(a){
+      var span = "<br/><span>" + a['content']['reply'] + "</span>"
+      $("#replyDiv").append(span);
+    });
+  }
+
+  $("#reply").click(replytoroot);
+});
+
 $(function(){
   console.log("Document ready");
   $(".node").focus(expand);
@@ -56,7 +73,7 @@ $(function(){
     n.qtip({
       content: [
         n.data('text'),
-        "<form><input><br><button type='submit'>Reply</button></form>"
+        "<form><input><br><button type='submit' id='" + n.data("text") + "'>Reply</button></form>"
       ],
       position: {
         my: 'top center',
