@@ -10,7 +10,7 @@ function setQTip(n) {
   n.qtip({
     content: [
       n.data('text'),
-      "<br><input data-id='" + n.data("id") + "'><br><button class='reply-button' id='reply_" + n.data("id") + "'>Reply</button>"
+      "<br><textarea data-id='" + n.data("id") + "'></textarea><br><button class='reply-button' id='reply_" + n.data("id") + "'>Reply</button>"
     ],
     position: {
       my: 'top center',
@@ -22,6 +22,13 @@ function setQTip(n) {
         width: 16,
         height: 8
       }
+    },
+    show: {
+      event: 'mouseover', // Show it on hover...
+      solo: true, // ...and hide all other tooltips...
+    },
+    hide: {
+      event: 'unfocus click',
     }
   });
 }
@@ -42,11 +49,12 @@ $(function() {
       data: { id: data['parent_id'] + "_" + data['id'], source: data['parent_id'], target: data['id'] }
     });
     setQTip(n);
+    cy.layout({name: 'cose'});
   }
 
   var replyToRoot = function(e) {
-    var textBox = $(e.target).parent().find("input:first");
-
+    var textBox = $(e.target).parent().find("textarea:first");
+    $("div").qtip("hide");
     data = {
         'node': textBox.attr("data-id"),
         'message': textBox.val(),
@@ -72,17 +80,30 @@ $(function() {
       {
         selector: 'node',
         style: {
-          'background-color': '#666',
-          'label': 'data(id)'
+          'width': 'label',
+          'height': 'label',
+          'shape': 'roundrectangle',
+          'padding-left': '10px',
+          'padding-right': '10px',
+          'padding-top': '10px',
+          'padding-bottom': '10px',
+          'background-color': '#ccc',
+          'label': 'data(text)',
+          'font-size': '12px',
+          'text-halign': 'center',
+          'text-valign': 'center',
+          'text-wrap': 'wrap',
+          'text-max-width': '120px',
+          'color': '#000',
         }
       },
 
       {
         selector: 'edge',
         style: {
-          'width': 3,
-          'line-color': '#ccc',
-          'target-arrow-color': '#ccc',
+          'width': 1,
+          'line-color': '#999',
+          'target-arrow-color': '#999',
           'target-arrow-shape': 'triangle'
         }
       }

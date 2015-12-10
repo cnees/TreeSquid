@@ -1,6 +1,9 @@
 {% load staticfiles %}
 
 <style>
+  body {
+    font-family: Arial, Verdana, sans-serif;
+  }
   #container {
     background:url('http://i82.photobucket.com/albums/j279/qazfan/x_1.png') no-repeat center;
     width:345px;
@@ -50,9 +53,17 @@
   .user_0 {
     background-color:#0f0!important;
   }
+  button, textarea {
+    width:100%;
+  }
+  textarea {
+    height:80px;
+    max-width:250px;
+    margin-bottom:5px;
+  }
 </style>
-<div id="cy" style="border:1px solid #f00;position:fixed;top:0px;right:0px;width:500px;height:500px;">&nbsp;</div>
-<div id="container">
+<div id="cy" style="position:fixed;top:0px;right:0px;width:100%;height:100%;margin-top:-19px;">&nbsp;</div>
+<!--<div id="container">
 <div class="node" id="node_0" tabindex="5">
   {{ root.text }}
 </div>
@@ -65,10 +76,10 @@
 <div id="replyDiv">
   <button id="reply">REPLY TO ROOT</button>
 </div>
+-->
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-
 <script>
-
   var csrf_ = '{{ csrf_token }}';
   
   // Watch out, global variables
