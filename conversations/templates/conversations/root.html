@@ -1,10 +1,9 @@
 {% load staticfiles %}
 
 <style>
-  html,
-  body {
-    margin: 0;
-    padding: 0;
+  html, body {
+    margin: 0px;
+    padding: 0px;
     font-family: helvetica, sans-serif;
     color: black;
     height: 100%;
@@ -12,62 +11,59 @@
     overflow: hidden;
     font-size: 1em;
     line-height: 1.5em;
-    background: white; <!-#454554; #3099ff; -->
+    background: #454554;
+    font-family: Arial, Verdana, sans-serif;
+  }
+  #container {
+    background:url('http://i82.photobucket.com/albums/j279/qazfan/x_1.png') no-repeat center;
+    width:345px;
+    height:345px;
+  }
+  .node {
+    z-index:5;
+    transition:background 0.25s;
+    width:100px;
+    height:100px;
+    box-sizing:border-box;
+    background:#ccc;
+    font-size:small;
+    font-family:sans-serif;
+    overflow:hidden;
+    padding:10px;
+    border:10px solid #ccc;
+    word-wrap: break-word;
+    border-radius:5px;
   }
 
-    body {
-      font-family: Arial, Verdana, sans-serif;
-    }
-    #container {
-      background:url('http://i82.photobucket.com/albums/j279/qazfan/x_1.png') no-repeat center;
-      width:345px;
-      height:345px;
-    }
-    .node {
-      z-index:5;
-      transition:background 0.25s;
-      width:100px;
-      height:100px;
-      box-sizing:border-box;
-      background:#ccc;
-      font-size:small;
-      font-family:sans-serif;
-      overflow:hidden;
-      padding:10px;
-      border:10px solid #ccc;
-      word-wrap: break-word;
-      border-radius:5px;
-    }
+  #container .node {
+    display:inline-block;
+    margin:10px;
+    position:absolute;
+  }
 
-    #container .node {
-      display:inline-block;
-      margin:10px;
-      position:absolute;
-    }
-
-    .node:focus {
-    }
-    .node-focus {
-      box-shadow:0 0 8px #000;
-      overflow:auto;
-      background:rgba(255,255,255,1);
-      width:260px;
-      height:260px;
-      z-index:10;
-      top:30px!important;
-      left:30px!important;
-    }
-    .user_0 {
-      background-color:#0f0!important;
-    }
-    button, textarea {
-      width:100%;
-    }
-    textarea {
-      height:80px;
-      max-width:250px;
-      margin-bottom:5px;
-    }
+  .node:focus {
+  }
+  .node-focus {
+    box-shadow:0 0 8px #000;
+    overflow:auto;
+    background:rgba(255,255,255,1);
+    width:260px;
+    height:260px;
+    z-index:10;
+    top:30px!important;
+    left:30px!important;
+  }
+  .user_0 {
+    background-color:#0f0!important;
+  }
+  button, textarea {
+    width:100%;
+  }
+  textarea {
+    height:80px;
+    max-width:250px;
+    margin-bottom:5px;
+  }
     
     a {
     color: black;
@@ -145,11 +141,11 @@
   .rectangle {
   	width: 100%;
   	height: 100px;
-  	background: #454554;
   	margin-top: 0;
   }
 
   .logo {
+    z-index:500;
   	color: #4fbeff;
   	display:block;
   	margin-right:auto;
@@ -164,10 +160,12 @@
   	color: #4fbeff;
   	margin-top: 0px;
   	line-height: 0;
-  	margin-left:80%;
   	position:absolute;
-  	margin-top: 40px;
+    top:22px;
+    right:22px;
+    text-transform:capitalize;
   }
+
 </style>
 <style>
   #create-root {
@@ -179,11 +177,12 @@
     width: 100%;
   }
 </style>
-<div id="cy" style="position:fixed;top:0px;left:15%;width:85%;height:100%;margin-top:100px;">&nbsp;</div>
 
 <body>
+  <div id="cy" style="position:fixed;top:0px;left:15%;width:85%;height:100%;z-index:100;margin-top:-25px;">&nbsp;</div>
+
 	<div class="rectangle">
-		<h3 class="handle">{{ username }}</h3>
+		<h3 class="handle">{{ request.user.username }}</h3>
 		<h1 class="logo" style="font-family:'Lobster 1.4';font-size:65px;">TreeSquid</h1>
 	</div>
 	

@@ -23,11 +23,12 @@ def index(request):
         latest_root_list = Message.objects.filter(root_id=F('id')).order_by('-last_modified')[:5]
         context = {'latest_root_list': latest_root_list}
         root_id = Message.objects.filter(root_id=F('id')).latest('id').id
-        # return redirect('conversation/' + str(root_id), root_id=root_id)
-        return render(request, 'conversations/index.html', context)
+        return redirect('conversation/' + str(root_id), root_id=root_id)
+        #return render(request, 'conversations/index.html', context)
 
     # Else, serve the user the welcome page
-    return render(request, 'conversations/index.html')
+    #return render(request, 'conversations/index.html')
+    return redirect('login/')
 
 def about(request):
     return render(request, 'conversations/about.html')
