@@ -3,6 +3,7 @@ from django.db.models import F
 from django.template import RequestContext
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
+from django_ajax.decorators import ajax
 
 from conversations.forms import UserForm
 from .models import Message
@@ -97,3 +98,9 @@ def user_login(request):
         # No context variables to pass to the template system, hence the
         # blank dictionary object...
         return render_to_response('conversations/login.html', {}, context)
+
+@ajax
+def replies(request, root_id):
+    response = "You're looking at the replies of root %s."
+    data = ""
+    return {'reply': 'asfd'}
