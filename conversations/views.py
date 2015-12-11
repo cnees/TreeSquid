@@ -121,13 +121,16 @@ def root(request, root_id):
     latest_root_list = Message.objects.filter(root_id=F('id')).order_by('-last_modified')[:5]
     return render(request, 'conversations/root.html', {'latest_root_list': latest_root_list, 'root': root})
 
+def filterInput(input):
+	return input.replace('"', r'\"').rstrip()
+
 @ajax
 def add_root(request):
   if request.method == 'POST':
     parse = urlparse.parse_qs(request.body)
     message = parse['message'][0]
     user_id = request.user.id
-    reply = Message(text=json.dumps(message)[1:-1].replace('\\"', "''"), user_id=user_id)
+    reply = Message(text=filterInput(message), user_id=user_id)
     reply.save()
     return {'id': reply.id, 'text': reply.text}
 
@@ -141,7 +144,7 @@ def add_reply(request, root_id):
 		# print message
 		parent = Message.objects.get(id=node)
 		user_id = request.user.id
-		reply = Message(text=json.dumps(message)[1:-1].replace('\\"', "''"), parent=parent, root=parent.root, user_id=user_id)
+		reply = Message(text=filterInput(message), parent=parent, root=parent.root, user_id=user_id)
 		reply.save()
 		# print reply
 		return {'id': reply.id, 'text': reply.text, 'parent_id': parent.id}

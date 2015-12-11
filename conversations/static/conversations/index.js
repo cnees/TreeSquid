@@ -9,7 +9,7 @@ function contract() {
 function setQTip(n) {
   n.qtip({
     content: [
-      n.data('text'),
+      n.data('text').replace(/\r?\n/g, '<br />'),
       "<br><textarea data-id='" + n.data("id") + "'></textarea><br><button class='reply-button' id='reply_" + n.data("id") + "'>Reply</button>"
     ],
     position: {
@@ -24,12 +24,11 @@ function setQTip(n) {
       }
     },
     show: {
-      event: 'mouseover', // Show it on hover...
-      solo: true, // ...and hide all other tooltips...
+        event: 'mouseover'
     },
     hide: {
-      event: 'unfocus click',
-    }
+        event: 'mouseout'
+    },
   });
 }
 
@@ -44,7 +43,7 @@ $(function() {
     $.post("/add_root/", new_root, function(data){
       window.location.replace("/conversation/" + data['content']['id']);
     }, 'json');
-  });
+  });2
 
   var addReply = function(e, data, cy){
     console.log(data['text']);
@@ -54,12 +53,17 @@ $(function() {
         id: data['id'],
         text: data['text']
       },
-      renderedPosition: {x: e.clientX + 150, y: e.clientY}
     });
     cy.add({ // edge
       data: { id: data['parent_id'] + "_" + data['id'], source: data['parent_id'], target: data['id'] }
     });
     setQTip(n);
+    var view = {
+      zoom: cy.zoom(),
+      pan: cy.pan()
+    };
+    cy.layout({name: 'breadthfirst'});
+    //cy.viewport(view);
   }
 
   var replyToMessage = function(e) {
@@ -90,15 +94,18 @@ $(function() {
       {
         selector: 'node',
         style: {
+          'border-opacity': 1,
+          'border-style': 'solid',
+          'border-width': 1,
           'width': 'label',
           'height': 'label',
-          'shape': 'roundrectangle',
+          'shape': 'rectangle',
           'padding-left': '10px',
           'padding-right': '10px',
           'padding-top': '10px',
           'padding-bottom': '10px',
-          'background-color': '#ccc',
-          'label': 'data(text)',
+          'background-color': '#fff',
+          'label': 'data(label)',
           'font-size': '12px',
           'text-halign': 'center',
           'text-valign': 'center',
@@ -112,15 +119,14 @@ $(function() {
         selector: 'edge',
         style: {
           'width': 1,
-          'line-color': '#999',
-          'target-arrow-color': '#999',
-          'target-arrow-shape': 'triangle'
-        }
+          'line-color': '#000',
+          'target-arrow-color': '#000',
+          'target-arrow-shape': 'triangle-backcurve',        }
       }
     ],
 
     layout: {
-      name: 'cose'
+      name: 'breadthfirst'
     },
 
     headless: false,

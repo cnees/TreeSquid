@@ -179,7 +179,7 @@
 </style>
 
 <body>
-  <div id="cy" style="position:fixed;top:0px;left:15%;width:85%;height:100%;z-index:100;margin-top:-25px;">&nbsp;</div>
+  <div id="cy" style="position:absolute;top:0px;left:15%;width:85%;height:100%;z-index:100;"></div>
 
 	<div class="rectangle">
 		<h3 class="handle">{{ request.user.username }}</h3>
@@ -228,7 +228,7 @@
   //   {% endfor %}
   // }
 
-  var colors = ['red', 'blue', 'yellow', 'green', 'orange', 'pink', 'cyan', 'purple'];
+  var colors = ['4fbeff', 'blue', 'while', 'green', 'orange', 'pink', 'cyan', 'purple'];
   self.userColors = {};
   self.i = 0;
   var color = function(userId) {
@@ -244,23 +244,15 @@
   }
 
   var GRAPH_ELEMENTS = [ // list of graph elements to start with
-    { // node a
-      data: {
-        id: '{{ root.id }}',
-        text: "{{ root.text }}"
-      }
-    },
     {% for reply in root.descendants.all %}
       {
         style: {
           'border-color': color({{ reply.user.id }} % colors.length),
-          
-          'border-opacity': 1,
-          'border-style': 'solid',
-          'border-width': 3
         },
+        label: "asdf",
         data: {
           id: '{{ reply.id }}',
+          label: "{{ reply.text|safe }}".length < 50 ? "{{ reply.text|safe }}" : "{{ reply.text|safe }}".substring(0,49) + "…",
           text: "{{ reply.text|safe }}",
         },
         classes: 'user_0'

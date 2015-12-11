@@ -13853,6 +13853,7 @@ BRp.load = function() {
     r.invalidateContainerClientCoordsCache();
 
     r.matchCanvasSize(r.container);
+    console.log(r.container);
     r.redrawHint('eles', true);
     r.redraw();
   }, 100 ) );
