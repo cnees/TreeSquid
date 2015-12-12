@@ -51,7 +51,8 @@ $(function() {
       group: "nodes",
       data: {
         id: data['id'],
-        text: data['text']
+        text: data['text'],
+        label: data['text']
       },
     });
     cy.add({ // edge
@@ -99,7 +100,7 @@ $(function() {
           'border-width': 1,
           'width': 'label',
           'height': 'label',
-          'shape': 'rectangle',
+          'shape': 'roundrectangle',
           'padding-left': '10px',
           'padding-right': '10px',
           'padding-top': '10px',

@@ -243,16 +243,19 @@
     }
   }
 
+  function truncateMessage(message) {
+    return message.length < 50 ? message : message.substring(0,49) + "…"
+  }
+
   var GRAPH_ELEMENTS = [ // list of graph elements to start with
     {% for reply in root.descendants.all %}
       {
         style: {
           'border-color': color({{ reply.user.id }} % colors.length),
         },
-        label: "asdf",
         data: {
           id: '{{ reply.id }}',
-          label: "{{ reply.text|safe }}".length < 50 ? "{{ reply.text|safe }}" : "{{ reply.text|safe }}".substring(0,49) + "…",
+          label: truncateMessage("{{ reply.text|safe }}"),
           text: "{{ reply.text|safe }}",
         },
         classes: 'user_0'
