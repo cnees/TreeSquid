@@ -142,6 +142,7 @@ def add_reply(request, root_id):
 		parse = urlparse.parse_qs(request.body)
 		node = parse['node'][0]
 		message = parse['message'][0]
+		print message
 		parent = Message.objects.get(id=node)
 		user_id = request.user.id
 		reply = Message(
