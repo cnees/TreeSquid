@@ -23,12 +23,6 @@ function setQTip(n) {
         height: 8
       }
     },
-    show: {
-        event: 'mouseover'
-    },
-    hide: {
-        event: 'mouseout'
-    },
   });
 }
 
@@ -98,7 +92,7 @@ $(function() {
         style: {
           'border-opacity': 1,
           'border-style': 'solid',
-          'border-width': 1,
+          'border-width': 2,
           'width': 'label',
           'height': 'label',
           'shape': 'roundrectangle',
