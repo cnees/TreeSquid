@@ -127,18 +127,21 @@ def root(request, root_id):
     # Get the root requested in the url
     root = get_object_or_404(Message, pk=root_id)
 
-    # Get the most recent messages by the logged in user
-    most_recent_messages = Message.objects.filter(user_id=request.user.id).order_by('-last_modified')[:5]
+    # Get the most recent messages from the logged in user, but only most recent from
+    # a given conversation (most recent message per root)
+    seen_root_ids = []
+    latest_message_list = [] 
+    # Look at all messages by the logged in user, in order of last modified
+    for m in Message.objects.filter(user_id=request.user.id).order_by('-last_modified'):
+        # If the root for the current message has not been seen, add the message to the 
+        # list and keep record the its root's id.
+        if m.root_id not in seen_root_ids:
+            seen_root_ids.append(m.root_id)
+            latest_message_list.append(m)
 
-    # Add all of the roots of the messages to the latest root list, without duplicates
-    latest_root_list = []
-    for m in most_recent_messages:
-        if m.root not in latest_root_list: 
-            latest_root_list.append(m.root)
-
-    # latest_root_list = Message.objects.filter(root_id=F('id')).order_by('-last_modified')[:5]
-    return render(request, 'conversations/root.html', {'latest_root_list': latest_root_list, 'root': root})
-
+    # TODO: Change the following line to return the list as "latest_message_list" 
+    return render(request, 'conversations/root.html', {'latest_message_lists': latest_message_list, 'root': root})
+ 
 def filterText(input):
 	return input.replace('"', r'\"').rstrip()
 
@@ -177,3 +180,11 @@ def user_logout(request):
 
     # Take the user back to the homepage.
     return HttpResponseRedirect('/')
+
+
+
+
+
+
+# Just some code that I'm keeping around for reference ~~ Chris
+ # latest_root_list = Message.objects.filter(root_id=F('id')).order_by('-last_modified')[:5]

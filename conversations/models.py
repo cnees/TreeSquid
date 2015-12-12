@@ -19,13 +19,9 @@ class Message(models.Model):
 
 		if self.parent:
 			self.root_id = self.parent.root_id
+			self.topic = self.parent.topic
 		else:
 			self.root_id = self.id
 		
 		super(Message, self).save()
 
-# class Conversation(models.Model):
-# 	root = models.ForeignKey(Message)
-# 	title = models.CharField('message text', max_length=20)
-# 	created = models.DateTimeField('created', auto_now_add=True)
-# 	last_modified = models.DateTimeField('last modified', auto_now=True)

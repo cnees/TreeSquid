@@ -60,12 +60,22 @@ m13 = Message(user=user4, parent=m11, text="That guy drinks way too much caffein
 m13.save()
 
 # Add some messages
-# This conversation should be the one that shows up as the most recent conversation for everyone
-m20 = Message(topic="Best EECS class?", text="I have one semester left, so I'm looking for great classes!", user=user2)
+m20 = Message(topic="Best EECS class?", text="I have a friend who wants recommendations for great classes!", user=user2)
 m20.save()
-m21 = Message(user=user1, parent=m20, text="EECS 388 was delightful!")
+m21 = Message(user=user1, parent=m20, text="EECS 388 was really fun!")
 m21.save()
 m22 = Message(user=user3, parent=m20, text="EECS 493 is great if you like front-end / user-experience material.")
 m22.save()
 m23 = Message(user=user4, parent=m22, text="I took 493, it was a class.")
 m23.save()
+
+# Add some messages
+# This conversation should be the one that shows up as the most recent conversation for everyone
+m30 = Message(topic="Most recent messages", text="Chris's most recent message at time of initialization", user=user1)
+m30.save()
+m31 = Message(user=user2, parent=m30, text="Clara's most recent message at time of initialization")
+m31.save()
+m32 = Message(user=user3, parent=m30, text="Joe's most recent message at time of initialization")
+m32.save()
+m33 = Message(user=user4, parent=m30, text="Brendan's most recent message at time of initialization")
+m33.save()
