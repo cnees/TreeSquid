@@ -142,16 +142,16 @@ def add_reply(request, root_id):
 		parse = urlparse.parse_qs(request.body)
 		node = parse['node'][0]
 		message = parse['message'][0]
+		print message
 		parent = Message.objects.get(id=node)
 		user_id = request.user.id
 		reply = Message(
 			text=filterText(message),
-			label=filterLabel(message),
 			parent=parent,
 			root=parent.root,
 			user_id=user_id)
 		reply.save()
-		return {'id': reply.id, 'text': reply.text, 'label': reply.label, 'parent_id': parent.id}
+		return {'id': reply.id, 'text': reply.text, 'parent_id': parent.id}
 
 # Use the login_required() decorator to ensure only those logged in can access the view.
 @login_required
