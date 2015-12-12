@@ -22,11 +22,16 @@ def index(request):
 
     # If the user is logged on, show the conversation to which they last contributed
     if request.user.is_authenticated():
-        latest_root_list = Message.objects.filter(root_id=F('id')).order_by('-last_modified')[:5]
-        context = {'latest_root_list': latest_root_list}
-        root_id = Message.objects.filter(root_id=F('id')).latest('id').id
+        # Get the user's most recent message
+        most_recent_message = Message.objects.filter(user_id=request.user.id).latest('id')
+
+        # latest_root_list = users_recent_messages.filter(root_id=F('id')).order_by('-last_modified')[:5]
+        # latest_root_list = Message.objects.filter(root_id=F('id')).order_by('-last_modified')[:5]
+        # root_id = Message.objects.filter(root_id=F('id')).latest('id').id
+        
+        # Send the user to the conversation containing their most recent message
+        root_id = most_recent_message.root_id
         return redirect('conversation/' + str(root_id), root_id=root_id)
-        #return render(request, 'conversations/index.html', context)
 
     # Else, serve the user the welcome page
     #return render(request, 'conversations/index.html')

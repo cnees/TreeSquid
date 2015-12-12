@@ -63,3 +63,5 @@ m10 = Message(user=user1, parent=m1, text="I've heard good things about the Elit
 m10.save()
 m10.save()
 
+m100 = Message(user=user1, parent=m21, text="I've heard good things about the Elite Rampage, thoughts?")
+m100.save()

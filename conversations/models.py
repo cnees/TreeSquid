@@ -22,3 +22,9 @@ class Message(models.Model):
 			self.root_id = self.id
 		
 		super(Message, self).save()
+
+# class Conversation(models.Model):
+# 	root = models.ForeignKey(Message)
+# 	title = models.CharField('message text', max_length=20)
+# 	created = models.DateTimeField('created', auto_now_add=True)
+# 	last_modified = models.DateTimeField('last modified', auto_now=True)
