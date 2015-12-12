@@ -77,6 +77,7 @@ $(function() {
     };
     $.post("/conversation/1/reply/", data, function(data){
       addReply(e, data['content'], cy);
+      console.log(data)
     }, 'json');
   }
 
@@ -122,7 +123,8 @@ $(function() {
           'width': 1,
           'line-color': '#000',
           'target-arrow-color': '#000',
-          'target-arrow-shape': 'triangle-backcurve',        }
+          'target-arrow-shape': 'triangle-backcurve',
+        }
       }
     ],
 

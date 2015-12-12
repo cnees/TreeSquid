@@ -1,183 +1,183 @@
 {% load staticfiles %}
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>TreeSquid</title>
+  <style>
+    html, body {
+      margin: 0px;
+      padding: 0px;
+      font-family: helvetica, sans-serif;
+      color: black;
+      height: 100%;
+      width: 100%;
+      overflow: hidden;
+      font-size: 1em;
+      line-height: 1.5em;
+      background: #454554;
+      font-family: Arial, Verdana, sans-serif;
+    }
+    #container {
+      background:url('http://i82.photobucket.com/albums/j279/qazfan/x_1.png') no-repeat center;
+      width:345px;
+      height:345px;
+    }
+    .node {
+      z-index:5;
+      transition:background 0.25s;
+      width:100px;
+      height:100px;
+      box-sizing:border-box;
+      background:#ccc;
+      font-size:small;
+      font-family:sans-serif;
+      overflow:hidden;
+      padding:10px;
+      border:10px solid #ccc;
+      word-wrap: break-word;
+      border-radius:5px;
+    }
 
-<style>
-  html, body {
-    margin: 0px;
-    padding: 0px;
-    font-family: helvetica, sans-serif;
-    color: black;
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    font-size: 1em;
-    line-height: 1.5em;
-    background: #454554;
-    font-family: Arial, Verdana, sans-serif;
-  }
-  #container {
-    background:url('http://i82.photobucket.com/albums/j279/qazfan/x_1.png') no-repeat center;
-    width:345px;
-    height:345px;
-  }
-  .node {
-    z-index:5;
-    transition:background 0.25s;
-    width:100px;
-    height:100px;
-    box-sizing:border-box;
-    background:#ccc;
-    font-size:small;
-    font-family:sans-serif;
-    overflow:hidden;
-    padding:10px;
-    border:10px solid #ccc;
-    word-wrap: break-word;
-    border-radius:5px;
-  }
+    #container .node {
+      display:inline-block;
+      margin:10px;
+      position:absolute;
+    }
 
-  #container .node {
-    display:inline-block;
-    margin:10px;
-    position:absolute;
-  }
+    .node:focus {
+    }
+    .node-focus {
+      box-shadow:0 0 8px #000;
+      overflow:auto;
+      background:rgba(255,255,255,1);
+      width:260px;
+      height:260px;
+      z-index:10;
+      top:30px!important;
+      left:30px!important;
+    }
+    .user_0 {
+      background-color:#0f0!important;
+    }
+    button, textarea {
+      width:100%;
+    }
+    textarea {
+      height:80px;
+      max-width:250px;
+      margin-bottom:5px;
+    }
+      
+      a {
+      color: black;
+      text-decoration: none;
+    }
 
-  .node:focus {
-  }
-  .node-focus {
-    box-shadow:0 0 8px #000;
-    overflow:auto;
-    background:rgba(255,255,255,1);
-    width:260px;
-    height:260px;
-    z-index:10;
-    top:30px!important;
-    left:30px!important;
-  }
-  .user_0 {
-    background-color:#0f0!important;
-  }
-  button, textarea {
-    width:100%;
-  }
-  textarea {
-    height:80px;
-    max-width:250px;
-    margin-bottom:5px;
-  }
-    
-    a {
-    color: black;
-    text-decoration: none;
-  }
+    .menu a:hover {
+      opacity: 0.5;
+      text-decoration:none;
+      color:black;
+    }
 
-  .menu a:hover {
-    opacity: 0.5;
-    text-decoration:none;
-    color:black;
-  }
+    .menu {
+      height: 100%;
+      width: 15%;
+      background: #454554;;
+      position: absolute;
+      top: 0;
+      left: 0%;
+      text-align: center;
+      margin-top:100px;
+    }
 
-  .menu {
-    height: 100%;
-    width: 15%;
-    background: #454554;;
-    position: absolute;
-    top: 0;
-    left: 0%;
-    text-align: center;
-    margin-top:100px;
-  }
-
-  .open {
-    left: 0;
-  }
+    .open {
+      left: 0;
+    }
 
 
-  .menu-trigger {
-    position: absolute;
-    top: 3%;
-    left: 7%;
-  }
+    .menu-trigger {
+      position: absolute;
+      top: 3%;
+      left: 7%;
+    }
 
-  .site-wrapper {
-    margin: 0 10%;
-    position: relative;
-  }
+    .site-wrapper {
+      margin: 0 10%;
+      position: relative;
+    }
 
-  .header {
-    position: relative;
-    margin: 30px 0;
-    text-align: center;
-  }
+    .header {
+      position: relative;
+      margin: 30px 0;
+      text-align: center;
+    }
 
-  .links {
-    margin: 0 auto;
-  }
+    .links {
+      margin: 0 auto;
+    }
 
-  .links i,
-  .menu-trigger i {
-    font-size: 3em;
-  }
+    .links i,
+    .menu-trigger i {
+      font-size: 3em;
+    }
 
-  .messageBox {
-  	width: 80%;
-    padding-top:10px;
-    padding-bottom:10px;
-  	background: #4fbeff;
-    display:block;
-  	text-align: center;
-  	border: 1px;
-  	border-style: solid;
-  	border-color: #454554;
-  	margin-right:auto;
-  	margin-left:auto;
-  	text-decoration:none;
-    overflow:auto;
-    box-sizing:border-box;
-  }
-  .messageBox span {
-    display:block;
-  }
+    .messageBox {
+    	width: 80%;
+      padding-top:10px;
+      padding-bottom:10px;
+    	background: #4fbeff;
+      display:block;
+    	text-align: center;
+    	border: 1px;
+    	border-style: solid;
+    	border-color: #454554;
+    	margin-right:auto;
+    	margin-left:auto;
+    	text-decoration:none;
+      overflow:auto;
+      box-sizing:border-box;
+    }
+    .messageBox span {
+      display:block;
+    }
 
-  .rectangle {
-  	width: 100%;
-  	height: 100px;
-  	margin-top: 0;
-  }
+    .rectangle {
+    	width: 100%;
+    	height: 100px;
+    	margin-top: 0;
+    }
 
-  .logo {
-    z-index:500;
-  	color: #4fbeff;
-  	display:block;
-  	margin-right:auto;
-  	margin-left:auto;
-  	text-align:center;
-  	vertical-align: middle;
-  	margin-top: 0px;
-  	line-height: 150%;
-  }
+    .logo {
+      z-index:500;
+    	color: #4fbeff;
+    	display:block;
+    	margin-right:auto;
+    	margin-left:auto;
+    	text-align:center;
+    	vertical-align: middle;
+    	margin-top: 0px;
+    	line-height: 150%;
+    }
 
-  .handle {
-  	color: #4fbeff;
-  	margin-top: 0px;
-  	line-height: 0;
-  	position:absolute;
-    top:22px;
-    right:22px;
-    text-transform:capitalize;
-  }
-
-</style>
-<style>
-  #create-root {
-    width:80%;
-    margin-left: auto;
-    margin-right: auto;
-  }
-  #create-root textarea, #create-root button {
-    width: 100%;
-  }
-</style>
-
+    .handle {
+    	color: #4fbeff;
+    	margin-top: 0px;
+    	line-height: 0;
+    	position:absolute;
+      top:22px;
+      right:22px;
+      text-transform:capitalize;
+    }
+    #create-root {
+      width:80%;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    #create-root textarea, #create-root button {
+      width: 100%;
+    }
+  </style>
+</head>
 <body>
   <div id="cy" style="position:absolute;top:0px;left:15%;width:85%;height:100%;z-index:100;"></div>
 
@@ -243,10 +243,17 @@
     }
   }
 
-  function truncateMessage(message) {
-    return message.length < 50 ? message : message.substring(0,49) + "…"
+  function messageToLabel(message) {
+    message = $('<textarea />').html(message).text();
+    message = message.length < 50 ? message : message.substring(0,49) + "…"
+    return message
   }
 
+  var messages = [];
+  {% for reply in root.descendants.all %}
+    messages[{{ forloop.counter0 }}] = ((function () {/*{{reply.text}}*/}).toString().match(/[^]*\/\*([^]*)\*\/\}$/)[1]);
+    console.log(messages[{{ forloop.counter0 }}]);
+  {% endfor %}
   var GRAPH_ELEMENTS = [ // list of graph elements to start with
     {% for reply in root.descendants.all %}
       {
@@ -255,8 +262,8 @@
         },
         data: {
           id: '{{ reply.id }}',
-          label: truncateMessage("{{ reply.text|safe }}"),
-          text: "{{ reply.text|safe }}",
+          label: messageToLabel(messages[{{ forloop.counter0 }}]),
+          text: messages[{{ forloop.counter0 }}],
         },
         classes: 'user_0'
       },
@@ -272,3 +279,4 @@
 <link href="http://cdnjs.cloudflare.com/ajax/libs/qtip2/2.2.0/jquery.qtip.min.css" rel="stylesheet" type="text/css" />
 <script src="https://cdn.rawgit.com/cytoscape/cytoscape.js-qtip/2.2.5/cytoscape-qtip.js"></script>
 <script src="{% static 'conversations/index.js' %}"></script>
+</html>

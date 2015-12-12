@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.shortcuts import get_object_or_404, render, render_to_response, redirect
 from django.db.models import F
 from django.template import RequestContext
@@ -121,7 +123,7 @@ def root(request, root_id):
     latest_root_list = Message.objects.filter(root_id=F('id')).order_by('-last_modified')[:5]
     return render(request, 'conversations/root.html', {'latest_root_list': latest_root_list, 'root': root})
 
-def filterInput(input):
+def filterText(input):
 	return input.replace('"', r'\"').rstrip()
 
 @ajax
@@ -130,7 +132,7 @@ def add_root(request):
     parse = urlparse.parse_qs(request.body)
     message = parse['message'][0]
     user_id = request.user.id
-    reply = Message(text=filterInput(message), user_id=user_id)
+    reply = Message(text=filterText(message), user_id=user_id)
     reply.save()
     return {'id': reply.id, 'text': reply.text}
 
@@ -140,14 +142,16 @@ def add_reply(request, root_id):
 		parse = urlparse.parse_qs(request.body)
 		node = parse['node'][0]
 		message = parse['message'][0]
-		# print node
-		# print message
 		parent = Message.objects.get(id=node)
 		user_id = request.user.id
-		reply = Message(text=filterInput(message), parent=parent, root=parent.root, user_id=user_id)
+		reply = Message(
+			text=filterText(message),
+			label=filterLabel(message),
+			parent=parent,
+			root=parent.root,
+			user_id=user_id)
 		reply.save()
-		# print reply
-		return {'id': reply.id, 'text': reply.text, 'parent_id': parent.id}
+		return {'id': reply.id, 'text': reply.text, 'label': reply.label, 'parent_id': parent.id}
 
 # Use the login_required() decorator to ensure only those logged in can access the view.
 @login_required
