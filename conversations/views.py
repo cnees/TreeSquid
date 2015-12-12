@@ -140,7 +140,7 @@ def root(request, root_id):
             latest_message_list.append(m)
 
     # TODO: Change the following line to return the list as "latest_message_list" 
-    return render(request, 'conversations/root.html', {'latest_message_lists': latest_message_list, 'root': root})
+    return render(request, 'conversations/root.html', {'latest_message_list': latest_message_list, 'root': root})
  
 def filterText(input):
 	return input.replace('"', r'\"').rstrip()
