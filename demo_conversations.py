@@ -26,7 +26,7 @@ user4.first_name = "Brendan"
 user4.last_name = "Killalea"
 user4.save()
 
-m1 = Message(text="Good Nerf Guns?", user=user1)
+m1 = Message(topic="Good Nerf Guns?", text="I'm looking for some advice on dart based ballistics.", user=user1)
 m1.save()
 m2 = Message(user=user2, parent=m1, text="Dude, totally depends on what you're using for? We looking for a casual game of sissy darts or you wanna deal some real dammage?")
 m2.save()
@@ -52,7 +52,7 @@ m10.save()
 
 # Add some messages
 # Chris shouldn't be able to see any of these messages.
-m11 = Message(text="Guys, let's have a conversation without Chris.", user=user2)
+m11 = Message(topic="No Chris allowed", text="Guys, let's have a conversation without Chris.", user=user2)
 m11.save()
 m12 = Message(user=user3, parent=m11, text="Yeah, that guy sucks. He won't stop asking me which classes I'm taking next semester...")
 m12.save()
@@ -61,11 +61,11 @@ m13.save()
 
 # Add some messages
 # This conversation should be the one that shows up as the most recent conversation for everyone
-m20 = Message(text="Best EECS class?", user=user4)
+m20 = Message(topic="Best EECS class?", text="I have one semester left, so I'm looking for great classes!", user=user2)
 m20.save()
 m21 = Message(user=user1, parent=m20, text="EECS 388 was delightful!")
 m21.save()
 m22 = Message(user=user3, parent=m20, text="EECS 493 is great if you like front-end / user-experience material.")
 m22.save()
-m23 = Message(user=user2, parent=m21, text="I'd agree about 388!")
+m23 = Message(user=user4, parent=m22, text="I took 493, it was a class.")
 m23.save()
