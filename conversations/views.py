@@ -124,8 +124,19 @@ def user_login(request):
 
 @login_required
 def root(request, root_id):
+    # Get the root requested in the url
     root = get_object_or_404(Message, pk=root_id)
-    latest_root_list = Message.objects.filter(root_id=F('id')).order_by('-last_modified')[:5]
+
+    # Get the most recent messages by the logged in user
+    most_recent_messages = Message.objects.filter(user_id=request.user.id).order_by('-last_modified')[:5]
+
+    # Add all of the roots of the messages to the latest root list, without duplicates
+    latest_root_list = []
+    for m in most_recent_messages:
+        if m.root not in latest_root_list: 
+            latest_root_list.append(m.root)
+
+    # latest_root_list = Message.objects.filter(root_id=F('id')).order_by('-last_modified')[:5]
     return render(request, 'conversations/root.html', {'latest_root_list': latest_root_list, 'root': root})
 
 def filterText(input):

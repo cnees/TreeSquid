@@ -6,6 +6,7 @@ class Message(models.Model):
 	parent = models.ForeignKey('Message', null=True, related_name="children")
 	root = models.ForeignKey('Message', null=True, related_name="descendants", related_query_name="children_of")
 	text = models.CharField('message text', max_length=5000)
+	topic = models.CharField('conversation topic', max_length=300, default="")
 	created = models.DateTimeField('created', auto_now_add=True)
 	last_modified = models.DateTimeField('last modified', auto_now=True)
 
