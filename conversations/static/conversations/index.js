@@ -37,7 +37,22 @@ $(function() {
     $.post("/add_root/", new_root, function(data){
       window.location.replace("/conversation/" + data['content']['id']);
     }, 'json');
-  });2
+  });
+  
+    $("#exitOverlay").click(function(){
+		document.getElementById( 'overlay' ).style.display = 'none';
+		document.getElementById( 'createMessage' ).style.display = 'none';
+	});
+	
+	$("#overlay").click(function(){
+		document.getElementById( 'overlay' ).style.display = 'none';
+	document.getElementById( 'createMessage' ).style.display = 'none';
+	});
+	
+	$("#createOverlay").click(function(){
+		document.getElementById( 'overlay' ).style.display = 'block';
+		document.getElementById( 'createMessage' ).style.display = 'block';
+	});
 
   var addReply = function(e, data, cy){
     var n = cy.add({

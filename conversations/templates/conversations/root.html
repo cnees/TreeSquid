@@ -150,7 +150,7 @@
   		background-color:transparent;
   	}
   	
-  	.overlay {
+  	#overlay {
       position:absolute;
       top:0;
       left:0;
@@ -158,6 +158,7 @@
       height:100%;
       background-color:rgba(0, 0, 0, 0.50);
       z-index:9999;
+	  display:none;
   	}
 
     .rectangle {
@@ -191,10 +192,16 @@
       width:100%;
     }
     #create-root textarea, #create-root button {
-      width: 100%;
+  		width: 80%;
+  		height: 40px;
+  		margin-left:auto;
+  		margin-right:auto;
+      display:block;
+      border:1px solid #ccc;
+      padding:10px;
     }
 	
-  	#createMessage input, #createMessage textarea, #createMessage button {
+  	#createMessage input, #createMessage textarea {
   		width: 80%;
   		height: 40px;
   		margin-left:auto;
@@ -217,19 +224,37 @@
       background:#fff;
       margin-top:100px;
       padding:10px;
+	  display:none;
     }
+	
+	#newConversation {
+	display:inline-block;
+}
+	
+	#exitOverlay {
+	width: 40px; 
+	height:40px;
+	float:right;
+	display:inline-block;
+	
+	}
   </style>
 </head>
 <body>
-	<div class="overlay">
-		<div id="createMessage">
-      <h2>New Conversation</h2>
-			<input type="text" name="topic" placeholder="Topic"><br>
-			<textarea name="rootMessage" placeholder="Message"></textarea><br>
-			<input type="text" name="friends" placeholder="Friends"><br>
-      <button id="create-root-button">Create</button><br>
-		</div>
+
+	
+	<div id="overlay">
 	</div>
+	
+	<div id="createMessage">
+		<button id="exitOverlay">X</button>
+		<h2 id="newConversation">New Conversation</h2>
+		<input type="text" name="topic" placeholder="Topic"><br>
+		<textarea name="rootMessage" placeholder="Message"></textarea><br>
+		<input type="text" name="friends" placeholder="Friends"><br>
+		<button id="create-root-button">Create</button><br>
+	</div>
+		
   <div id="cy" style="position:absolute;top:0px;left:250px;width:calc(100% - 250px);height:100%;z-index:100;"></div>
 
 	<div class="rectangle">
@@ -257,7 +282,6 @@
 	{% endif %}
 
 </div>
-<div id="overlay"></div>
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
