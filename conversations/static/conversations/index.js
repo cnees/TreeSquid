@@ -40,7 +40,6 @@ $(function() {
   });2
 
   var addReply = function(e, data, cy){
-    console.log(data['text']);
     var n = cy.add({
       group: "nodes",
       data: {
@@ -71,7 +70,6 @@ $(function() {
     };
     $.post("/conversation/1/reply/", data, function(data){
       addReply(e, data['content'], cy);
-      console.log(data)
     }, 'json');
   }
 
@@ -137,11 +135,31 @@ $(function() {
     pixelRatio: 1
   });
 
+  var defaults = {
+    zoomFactor: 0.05, // zoom factor per zoom tick
+    zoomDelay: 45, // how many ms between zoom ticks
+    minZoom: 0.1, // min zoom level
+    maxZoom: 10, // max zoom level
+    fitPadding: 50, // padding when fitting
+    panSpeed: 10, // how many ms in between pan ticks
+    panDistance: 10, // max pan distance per tick
+    panDragAreaSize: 75, // the length of the pan drag box in which the vector for panning is calculated (bigger = finer control of pan speed and direction)
+    panMinPercentSpeed: 0.25, // the slowest speed we can pan by (as a percent of panSpeed)
+    panInactiveArea: 8, // radius of inactive area in pan drag box
+    panIndicatorMinOpacity: 0.5, // min opacity of pan indicator (the draggable nib); scales from this to 1.0
+    zoomOnly: false, // a minimal version of the ui only with zooming (useful on systems with bad mousewheel resolution)
+
+    // icon class names
+    sliderHandleIcon: 'fa fa-minus',
+    zoomInIcon: 'fa fa-plus',
+    zoomOutIcon: 'fa fa-minus',
+    resetIcon: 'fa fa-expand'
+  };
+
+  cy.panzoom( defaults );
+  $(".cy-panzoom").css({'position':'absolute','top':0,'left':0})
   cy.nodes().forEach(function(n){
     setQTip(n);
   });
 
-  cy.onRender(handler = function(){
-    //console.log('frame rendered');
-  });
 });
