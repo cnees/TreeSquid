@@ -11,6 +11,17 @@
       box-sizing:border-box;
     }
 
+    #sidebar {
+      padding:10px;
+      position:absolute;
+      top:0px;
+      left:0px;
+      height:100%;
+      overflow:auto;
+      width:150px;
+      color: #454554;
+    }
+
     html, body {
       margin: 0px;
       padding: 0px;
@@ -41,7 +52,7 @@
     }
 
     a {
-      color:#4fbeff;
+      color:#99CCCC;
       text-decoration: none;
     }
 
@@ -78,7 +89,7 @@
       height: 62px;
       padding-top:10px;
       padding-bottom:10px;
-      background: #4fbeff;
+      background: #99CCCC;
       display:block;
       text-align: center;
       border: 1px;
@@ -124,26 +135,27 @@
       display:none;
     }
 
-    .rectangle {
+    .top-bar {
       width: 100%;
       height: 100px;
       margin-top: 0;
     }
 
     .logo {
+      font-family:'Lobster';
+      font-size:65px;
       z-index:500;
-      color: #4fbeff;
+      color: #99CCCC;
       display:block;
       margin-right:auto;
       margin-left:auto;
       text-align:center;
       vertical-align: middle;
       margin-top: 0px;
-      line-height: 150%;
     }
 
     .handle {
-      color: #4fbeff;
+      color: #99CCCC;
       margin-top: 0px;
       line-height: 0;
       position:absolute;
@@ -254,12 +266,25 @@
       <button id="create-root-button">Create</button><br>
     </div>
   </div>
+
+  <div id="sidebar">
+    {% if latest_message_list %}
+      {% for message in latest_message_list %}
+        <a href="/conversation/{{message.root_id}}" class="messageBox"><span>
+          <div class="topic">{{ message.topic }}</div>
+          <div class="lastMessage">{{ message.text }}</div>
+        </span></a>
+      {% endfor %}
+    {% else %}
+      <p>No conversations are available.</p>
+    {% endif %}
+  </div>
   
   <div id="cy"></div>
 
-  <div class="rectangle">
+  <div class="top-bar">
     <h3 class="handle" style="z-index:9000">{{ request.user.username }}&nbsp;&nbsp;-&nbsp;&nbsp;<a href="/logout/">Logout</a></h3>
-    <h1 class="logo" style="font-family:'Lobster';font-size:65px;">TreeSquid</h1>
+    <h1 class="logo">TreeSquid</h1>
   </div>
   
   </head>
@@ -270,18 +295,6 @@
     <button id="createOverlay">New Conversation</button>
   </div>
   <br>
-  <div class="boxContain">
-  {% if latest_message_list %}
-    {% for message in latest_message_list %}
-   <a href="/conversation/{{message.root_id}}" class="messageBox"><span>
-    <div class="topic">{{ message.topic }}</div>
-    <div class="lastMessage">{{ message.text }}</div>
-   </span></a>
-    {% endfor %}
-  {% else %}
-    <p>No conversations are available.</p>
-  {% endif %}
-	</div>
 </div>
 </body>
 
@@ -303,7 +316,7 @@
   // }
 
   var colors = ['#99FFFF', '#339900', '#99CC99', '#80ABAB', '#989866', '#9999CC', '#000'];
-  // ['#4fbeff', 'blue', '#CCC', 'green', 'orange', 'pink', 'cyan', 'purple'];
+  // ['#99CCCC', 'blue', '#CCC', 'green', 'orange', 'pink', 'cyan', 'purple'];
   var userColors = {};
   var counter_i = 0;
   var color = function(userId) {
