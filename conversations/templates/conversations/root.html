@@ -335,11 +335,11 @@
     {% for reply in root.descendants.all %}
       {
         style: {
-          'border-color': color({{ reply.user.id }}),
+          'border-color': color({{ reply.user_id }}),
         },
         data: {
           id: '{{ reply.id }}',
-          label: messageToLabel(messages[{{ forloop.counter0 }}]),
+          user: '{{ reply.user.username }}',
           text: messages[{{ forloop.counter0 }}],
         }
       },
