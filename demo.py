@@ -1,5 +1,5 @@
 from conversations.models import Message
-from conversations.models import User
+from django.contrib.auth.models import User
 
 # Delete old entries
 User.objects.all().delete()
@@ -19,10 +19,10 @@ u.first_name = "Guest"
 u.last_name = "User"
 u.save()
 
-u2 = User.objects.create_user('TreeSquid', 'demo@example.com', 'demopassword')
+u2 = User.objects.create_user('TreeSquid', 'treesquid@example.com', 'treesquid')
 u2.first_name = "Team"
 u2.last_name = "TreeSquid"
-u.save()
+u2.save()
 
 # Add a few users
 user1 = User.objects.create_user('chris', 'chrisloechli@gmail.com', 'chrispassword')
