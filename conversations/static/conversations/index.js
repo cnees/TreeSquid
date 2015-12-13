@@ -9,6 +9,8 @@ function contract() {
 function setQTip(n) {
   n.qtip({
     content: [
+	  n.data('user'),
+	  "<br>",
       n.data('text').replace(/\r?\n/g, '<br />'),
       "<br><textarea data-id='" + n.data("id") + "' placeholder='Reply'></textarea><br><button class='reply-button' id='reply_" + n.data("id") + "'>Reply</button>"
     ],
