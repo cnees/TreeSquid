@@ -30,14 +30,25 @@ $(function() {
 
   $("#create-root-button").click(function(){
     //$("#create-root-textarea").val()
-    new_root = {
-      'message': $("#messageField").val(),
-	  'topic': $("#topicField").val(),
-      'csrfmiddlewaretoken': csrf_,
-    }
+	if ($("#topicField").val()) {
+		if ($("#messageField").val()) {
+			new_root = {
+			'topic': $("#topicField").val(),
+			'message': $("#messageField").val(),
+			'csrfmiddlewaretoken': csrf_,
+			}
+		}
+		else {
+			new_root = {
+			'topic': $("#topicField").val(),
+			'message': $("#topicField").val(),
+			'csrfmiddlewaretoken': csrf_,
+			}	
+		}
     $.post("/add_root/", new_root, function(data){
       window.location.replace("/conversation/" + data['content']['id']);
     }, 'json');
+	}
   });
   
   $("#exitOverlay").click(function(){
