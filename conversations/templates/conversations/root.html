@@ -18,6 +18,10 @@
       background: #454554;
       font-family: Arial, Verdana, sans-serif;
     }
+	
+	* {
+	box-sizing:border-box;
+	}
     #container {
       background:url('http://i82.photobucket.com/albums/j279/qazfan/x_1.png') no-repeat center;
       width:345px;
@@ -176,14 +180,13 @@
 	z-index:10000;
 	margin-left:auto;
 	margin-right:auto;
-	height:450px;
 	width: 700px;
 	background-color:white;
 	margin-top:100px;
+	padding:10px;
 	}
 	
 	.createMessageDesc {
-	margin-top: 100px;
 	width: 700px;
 	height:60px;
 	text-align:center;
@@ -229,10 +232,30 @@
     #create-root textarea, #create-root button {
       width: 100%;
     }
+	
+	.inputMessage {
+		width: 80%;
+		height: 80px;
+		margin-left:auto;
+		margin-right:auto;
+	}
   </style>
 </head>
 <body>
-
+	<div class="overlay">
+		<div class="createMessage">
+			<div class="createMessageDesc"><p class="topicCreate">Topic</p></div>
+			<input type="text" name="Topic" class="inputMessage"><br>
+			<div class="createMessageDesc"><p class="topicCreate">Message</p></div>
+			<input type="text" name="rootMessage" class="inputMessage"><br>
+			<div class="createMessageDesc"><p class="topicCreate">Friends</p></div>
+			<input type="text" name="friends" class="inputMessage">
+		
+			<button id="create-root-button">Create</button>
+		
+		
+		</div>
+	</div>
   <div id="cy" style="position:absolute;top:0px;left:250px;width:calc(100% - 250px);height:100%;z-index:100;"></div>
 
 	<div class="rectangle">
