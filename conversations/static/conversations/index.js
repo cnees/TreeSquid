@@ -92,7 +92,7 @@ $(function() {
       zoom: cy.zoom(),
       pan: cy.pan()
     };
-    cy.layout({name: 'breadthfirst', animate: 'true'});
+    cy.layout({name: 'breadthfirst', animate: 'true', directed: 'true'});
     //cy.viewport(view);
   }
 
@@ -126,7 +126,7 @@ $(function() {
         style: {
           'border-opacity': 1,
           'border-style': 'solid',
-          'border-width': 2,
+          'border-width': 3,
           'width': 'label',
           'height': 'label',
           'shape': 'roundrectangle',
@@ -149,15 +149,15 @@ $(function() {
         selector: 'edge',
         style: {
           'width': 1,
-          'line-color': '#000',
-          'target-arrow-color': '#000',
+          'line-color': '#4fbeff',
+          'target-arrow-color': '#4fbeff',
           'target-arrow-shape': 'triangle-backcurve',
         }
       }
     ],
 
     layout: {
-      name: 'breadthfirst'
+      name: 'breadthfirst', animate: 'true', directed: 'true'
     },
 
     headless: false,
