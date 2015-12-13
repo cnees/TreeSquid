@@ -94,6 +94,10 @@
     .messageBox span {
       display:block;
     }
+	
+	#currentMessage {
+	      background: #00a0ff;
+	}
   
     .topic {
       text-overflow:ellipsis;
@@ -274,10 +278,17 @@
   <div class="boxContain">
   {% if latest_message_list %}
     {% for message in latest_message_list %}
-   <a href="/conversation/{{message.root_id}}" class="messageBox"><span>
-    <div class="topic">{{ message.topic }}</div>
-    <div class="lastMessage">{{ message.text }}</div>
-   </span></a>
+		  {% if message.root_id == root %}
+		  	<a href="/conversation/{{message.root_id}}" class="messageBox" id="currentMessage"><span>
+			<div class="topic">{{ message.topic }}</div>
+			<div class="lastMessage">{{ message.text }}</div>
+			</span></a>
+		  {% else %}
+			<a href="/conversation/{{message.root_id}}" class="messageBox"><span>
+			<div class="topic">{{ message.topic }}</div>
+			<div class="lastMessage">{{ message.text }}</div>
+			</span></a>
+		{% endif %}
     {% endfor %}
   {% else %}
     <p>No conversations are available.</p>
