@@ -151,8 +151,8 @@ $(function() {
         selector: 'edge',
         style: {
           'width': 1,
-          'line-color': '#4fbeff',
-          'target-arrow-color': '#4fbeff',
+          'line-color': '#996633',
+          'target-arrow-color': '#996633',
           'target-arrow-shape': 'triangle-backcurve',
         }
       }
