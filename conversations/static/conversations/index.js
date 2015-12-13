@@ -10,7 +10,7 @@ function setQTip(n) {
   n.qtip({
     content: [
       n.data('text').replace(/\r?\n/g, '<br />'),
-      "<br><textarea data-id='" + n.data("id") + "'></textarea><br><button class='reply-button' id='reply_" + n.data("id") + "'>Reply</button>"
+      "<br><textarea data-id='" + n.data("id") + "' placeholder='Reply'></textarea><br><button class='reply-button' id='reply_" + n.data("id") + "'>Reply</button>"
     ],
     position: {
       my: 'top center',
