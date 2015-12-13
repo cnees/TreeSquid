@@ -18,26 +18,28 @@ from conversations.forms import UserForm
 from .models import Message
 
 def index(request):
-    context = {}
-
-    # If the user is logged on, show the conversation to which they last contributed
+    # Check to see if the user is authenticated
     if request.user.is_authenticated():
-        # Get the user's most recent message
-        most_recent_message = Message.objects.filter(user_id=request.user.id).latest('id')
+        # Get the latest message that the user published.
+        latest_message = Message.objects.filter(user_id=request.user.id).order_by('-last_modified')[:1]
 
-        # Send the user to the conversation containing their most recent message
-        root_id = most_recent_message.root_id
-        return redirect('conversation/' + str(root_id), root_id=root_id)
+        # If the user has not made any messages yet, will send the empty list
+        if not latest_message:
+            return render(request, 'conversations/root.html')
+
+        # Else, show them the conversation graph to which they most recently contributed.
+        root_id = latest_message[0].root_id
+
+        return redirect('/conversation/' + str(root_id), root_id=root_id)
 
     # Else, serve the user the welcome page
-    #return render(request, 'conversations/index.html')
-    return redirect('login/')
+    else:
+        return redirect('/register/')
 
 def about(request):
     return render(request, 'conversations/about.html')
 
 def register(request):
-    # Like before, get the request's context.
     context = RequestContext(request)
 
     # A boolean value for telling the template whether the registration was successful.
@@ -61,11 +63,17 @@ def register(request):
             # Update our variable to tell the template registration was successful.
             registered = True
 
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            login(request, user)
+            # TODO: come up with a better page to send new users to.
+            return HttpResponseRedirect('/')
+
         # Invalid form - mistakes or something else?
         # Print problems to the terminal.
         # They'll also be shown to the user.
-        # else:
-            # print user_form.errors
+        else:
+            print user_form.errors
+
 
     # Not a HTTP POST, so we render our form using two ModelForm instances.
     # These forms will be blank, ready for user input.
@@ -135,7 +143,6 @@ def root(request, root_id):
             seen_root_ids.append(m.root_id)
             latest_message_list.append(m)
 
-    # TODO: Change the following line to return the list as "latest_message_list" 
     return render(request, 'conversations/root.html', {'latest_message_list': latest_message_list, 'root': root})
  
 def filterText(input):
@@ -175,7 +182,7 @@ def user_logout(request):
     logout(request)
 
     # Take the user back to the homepage.
-    return HttpResponseRedirect('/')
+    return HttpResponseRedirect('/login/')
 
 
 
@@ -187,3 +194,5 @@ def user_logout(request):
         # latest_root_list = users_recent_messages.filter(root_id=F('id')).order_by('-last_modified')[:5]
         # latest_root_list = Message.objects.filter(root_id=F('id')).order_by('-last_modified')[:5]
         # root_id = Message.objects.filter(root_id=F('id')).latest('id').id
+ # Get the most recent message for the user
+        # latest_message = Message.objects.filter(user_id=request.user.id).latest('id')
