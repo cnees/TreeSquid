@@ -64,7 +64,14 @@
       left: 0%;
       text-align: center;
       margin-top:100px;
+	  margin-bottom: 100px;
     }
+	
+	.boxContain {
+	display:block;
+	height:calc(100% - 165px);
+	overflow-y:auto;
+	}
 
     .messageBox {
       width: 100%;
@@ -210,6 +217,29 @@
       height:100%;
       z-index:100;
     }
+	
+	::-webkit-scrollbar {
+		width: 12px;
+	}
+ 
+	/* Track */
+	::-webkit-scrollbar-track {
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+	}
+ 
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+		background: rgba(255,255,255,0.8); 
+		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+	}
+
+	::-webkit-scrollbar-thumb:window-inactive {
+		background: rgba(255,255,255,0.8);; 
+	}
 
   </style>
 </head>
@@ -241,6 +271,7 @@
     <button id="createOverlay">New Conversation</button>
   </div>
   <br>
+  <div class="boxContain">
   {% if latest_message_list %}
     {% for message in latest_message_list %}
    <a href="/conversation/{{message.root_id}}" class="messageBox"><span>
@@ -251,7 +282,7 @@
   {% else %}
     <p>No conversations are available.</p>
   {% endif %}
-
+	</div>
 </div>
 </body>
 
