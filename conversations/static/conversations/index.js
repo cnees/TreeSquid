@@ -31,7 +31,8 @@ $(function() {
   $("#create-root-button").click(function(){
     //$("#create-root-textarea").val()
     new_root = {
-      'message': $("#create-root-textarea").val(),
+      'message': $("#messageField").val(),
+	  'topic': $("#topicField").val(),
       'csrfmiddlewaretoken': csrf_,
     }
     $.post("/add_root/", new_root, function(data){
