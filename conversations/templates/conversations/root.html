@@ -243,17 +243,16 @@
 <body>
 	
 	<div id="overlay">
+    <div id="createMessage">
+      <button id="exitOverlay">X</button>
+      <h2 id="newConversation">New Conversation</h2>
+      <input type="text" name="topic" placeholder="Topic"><br>
+      <textarea name="rootMessage" placeholder="Message"></textarea><br>
+      <input type="text" name="friends" placeholder="Friends"><br>
+      <button id="create-root-button">Create</button><br>
+    </div>
 	</div>
 	
-	<div id="createMessage">
-		<button id="exitOverlay">X</button>
-		<h2 id="newConversation">New Conversation</h2>
-		<input type="text" name="topic" placeholder="Topic"><br>
-		<textarea name="rootMessage" placeholder="Message"></textarea><br>
-		<input type="text" name="friends" placeholder="Friends"><br>
-		<button id="create-root-button">Create</button><br>
-	</div>
-		
   <div id="cy" style="position:absolute;top:0px;left:250px;width:calc(100% - 250px);height:100%;z-index:100;"></div>
 
 	<div class="rectangle">

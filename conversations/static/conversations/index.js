@@ -39,15 +39,19 @@ $(function() {
     }, 'json');
   });
   
-    $("#exitOverlay").click(function(){
+  $("#exitOverlay").click(function(){
 		document.getElementById( 'overlay' ).style.display = 'none';
 		document.getElementById( 'createMessage' ).style.display = 'none';
 	});
 	
 	$("#overlay").click(function(){
 		document.getElementById( 'overlay' ).style.display = 'none';
-	document.getElementById( 'createMessage' ).style.display = 'none';
+	  document.getElementById( 'createMessage' ).style.display = 'none';
 	});
+
+  $("#createMessage").click(function(event){
+    event.stopPropagation();
+  });
 	
 	$("#createOverlay").click(function(){
 		document.getElementById( 'overlay' ).style.display = 'block';
