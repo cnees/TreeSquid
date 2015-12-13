@@ -214,7 +214,7 @@
     #createMessage textarea{
       height: 80px;
     }
-    
+
     #createMessage {
       text-align:center;
       z-index:10000;
@@ -241,7 +241,6 @@
   </style>
 </head>
 <body>
-
 	
 	<div id="overlay">
 	</div>
@@ -285,6 +284,7 @@
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
 <script>
   var csrf_ = '{{ csrf_token }}';
   
@@ -300,19 +300,22 @@
   //   {% endfor %}
   // }
 
-  var colors = ['4fbeff', 'blue', 'while', 'green', 'orange', 'pink', 'cyan', 'purple'];
-  self.userColors = {};
-  self.i = 0;
+  var colors = ['#00F', '#0F0', '#0FF', '#F00', '#F0F', '#FF0'];
+  // ['#4fbeff', 'blue', '#CCC', 'green', 'orange', 'pink', 'cyan', 'purple'];
+  var userColors = {};
+  var counter_i = 0;
   var color = function(userId) {
-    if (userId in self.userColors) return userColors[userId];
-    else {
-      self.userColors[userId] = colors[self.i];
-      self.i += 1;
-      if (self.i >= colors.length) {
+    console.log("Color - " + userId);
+    if(!(userId in userColors)) {
+      userColors[userId] = colors[counter_i];
+      counter_i += 1;
+      console.log(counter_i);
+      if (counter_i >= colors.length) {
         console.log("We ran out of colors for the number of users. We will now repeat");
-        self.i = 0;
+        counter_i = 0;
       }
     }
+    return userColors[userId];
   }
 
   function messageToLabel(message) {
@@ -329,7 +332,7 @@
     {% for reply in root.descendants.all %}
       {
         style: {
-          'border-color': color({{ reply.user.id }} % colors.length),
+          'border-color': color({{ reply.user.id }}),
         },
         data: {
           id: '{{ reply.id }}',
