@@ -10,7 +10,7 @@ function setQTip(n) {
   n.qtip({
     content: [
       n.data('text').replace(/\r?\n/g, '<br />'),
-      "<br><textarea data-id='" + n.data("id") + "'></textarea><br><button class='reply-button' id='reply_" + n.data("id") + "'>Reply</button>"
+      "<br><textarea data-id='" + n.data("id") + "' placeholder='Reply'></textarea><br><button class='reply-button' id='reply_" + n.data("id") + "'>Reply</button>"
     ],
     position: {
       my: 'top center',
@@ -30,14 +30,45 @@ $(function() {
 
   $("#create-root-button").click(function(){
     //$("#create-root-textarea").val()
-    new_root = {
-      'message': $("#create-root-textarea").val(),
-      'csrfmiddlewaretoken': csrf_,
-    }
+	if ($("#topicField").val()) {
+		if ($("#messageField").val()) {
+			new_root = {
+			'topic': $("#topicField").val(),
+			'message': $("#messageField").val(),
+			'csrfmiddlewaretoken': csrf_,
+			}
+		}
+		else {
+			new_root = {
+			'topic': $("#topicField").val(),
+			'message': $("#topicField").val(),
+			'csrfmiddlewaretoken': csrf_,
+			}	
+		}
     $.post("/add_root/", new_root, function(data){
       window.location.replace("/conversation/" + data['content']['id']);
     }, 'json');
-  });2
+	}
+  });
+  
+  $("#exitOverlay").click(function(){
+		document.getElementById( 'overlay' ).style.display = 'none';
+		document.getElementById( 'createMessage' ).style.display = 'none';
+	});
+	
+	$("#overlay").click(function(){
+		document.getElementById( 'overlay' ).style.display = 'none';
+	  document.getElementById( 'createMessage' ).style.display = 'none';
+	});
+
+  $("#createMessage").click(function(event){
+    event.stopPropagation();
+  });
+	
+	$("#createOverlay").click(function(){
+		document.getElementById( 'overlay' ).style.display = 'block';
+		document.getElementById( 'createMessage' ).style.display = 'block';
+	});
 
   var addReply = function(e, data, cy){
     var n = cy.add({
@@ -45,18 +76,23 @@ $(function() {
       data: {
         id: data['id'],
         text: data['text'],
-        label: data['text']
+        label: data['text'],
       },
+      renderedPosition: {x: e.originalEvent.clientX - $("#cy").offset().left, y: e.originalEvent.clientY - $("#cy").offset().top},
     });
     cy.add({ // edge
-      data: { id: data['parent_id'] + "_" + data['id'], source: data['parent_id'], target: data['id'] }
+      data: {
+        id: data['parent_id'] + "_" + data['id'],
+        source: data['parent_id'],
+        target: data['id']
+      }
     });
     setQTip(n);
     var view = {
       zoom: cy.zoom(),
       pan: cy.pan()
     };
-    cy.layout({name: 'breadthfirst'});
+    cy.layout({name: 'breadthfirst', animate: 'true'});
     //cy.viewport(view);
   }
 
@@ -148,7 +184,6 @@ $(function() {
     panInactiveArea: 8, // radius of inactive area in pan drag box
     panIndicatorMinOpacity: 0.5, // min opacity of pan indicator (the draggable nib); scales from this to 1.0
     zoomOnly: false, // a minimal version of the ui only with zooming (useful on systems with bad mousewheel resolution)
-
     // icon class names
     sliderHandleIcon: 'fa fa-minus',
     zoomInIcon: 'fa fa-plus',

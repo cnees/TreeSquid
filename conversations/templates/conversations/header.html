@@ -1,0 +1,190 @@
+<html><head>
+	<title>TreeSquid Wrapper</title>
+	
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+     <!-- Optional theme -->
+    <link href="https:///bootswatch.com/paper/bootstrap.min.css" rel="stylesheet" id="bs-theme-stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	
+	<script>
+	$('.menu-trigger a').bind('click', function() {
+
+  if ($('.menu-trigger i').hasClass('fa-bars')) {
+    $('.menu-trigger i').transition({
+      rotate: '180deg'
+    });
+    $('.menu-trigger i').removeClass('fa-bars');
+    $('.menu-trigger i').addClass('fa-times');
+
+  } else {
+    $('.menu-trigger i').transition({
+      rotate: '-180deg'
+    });
+    $('.menu-trigger i').addClass('fa-bars');
+    $('.menu-trigger i').removeClass('fa-times');
+  }
+
+  $('.menu').toggleClass('open', 200, 'easeOutQuad');
+
+});
+	</script>
+	
+	<style>
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: helvetica, sans-serif;
+  color: black;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  font-size: 1em;
+  line-height: 1.5em;
+  background: white; <!-#454554; #3099ff; -->
+}
+
+a {
+  color: black;
+}
+
+.menu a:hover {
+  opacity: 0.5;
+  text-decoration:none;
+  color:black;
+}
+
+.menu {
+  height: 100%;
+  width: 15%;
+  background: #454554;;
+  position: absolute;
+  top: 0;
+  left: 0%;
+  text-align: center;
+  margin-top:100px;
+}
+
+.open {
+  left: 0;
+}
+
+
+.menu-trigger {
+  position: absolute;
+  top: 3%;
+  left: 7%;
+}
+
+.site-wrapper {
+  margin: 0 10%;
+  position: relative;
+}
+
+.header {
+  position: relative;
+  margin: 30px 0;
+  text-align: center;
+}
+
+.links {
+  margin: 0 auto;
+}
+
+.links i,
+.menu-trigger i {
+  font-size: 3em;
+}
+
+.button{
+	display:block;
+	width:80%;
+	height:10%;
+	font-size:40px;
+	color:black;
+	text-align:center;
+	margin-right:auto;
+	margin-left:auto;
+	border:2px;
+	border-color:black;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background:#70d370;
+	line-height: 100%
+}
+
+.messageBox {
+	width: 80%;
+	height: 10%;
+	display:inline-block;
+	background: #4fbeff;
+	text-align: center;
+	vertical-align:middle;
+	border: 1px;
+	border-style: solid;
+	border-color: #454554;
+	margin-right:auto;
+	margin-left:auto;
+	text-decoration:none;
+	line-height: 560%;
+	
+}
+
+.rectangle {
+	width: 100%;
+	height: 100px;
+	background: #454554;
+	margin-top: 0;
+}
+
+.logo {
+	color: #4fbeff;
+	display:block;
+	margin-right:auto;
+	margin-left:auto;
+	text-align:center;
+	vertical-align: middle;
+	margin-top: 0px;
+	line-height: 150%;
+}
+
+.handle {
+	color: #4fbeff;
+	margin-top: 0px;
+	line-height: 0;
+	margin-left:80%;
+	position:absolute;
+	margin-top: 40px;
+}
+	</style>
+	
+	<div class="rectangle">
+		<h3 class="handle">{{ username }}</h3>
+		<h1 class="logo">TreeSquid</h1>
+	</div>
+	
+	</head>
+	<body>
+	
+	<div class="menu">
+	<a href="#" class="button">New Message</a>
+	{% if latest_root_list %}
+		{% for root in latest_root_list %}
+			<a href="#" class="messageBox">{{ root.text }}</a>
+    {% endfor %}
+	{% else %}
+		<p>No conversations are available.</p>
+	{% endif %}
+
+</div>
+<div class="site-wrapper">
+  <div class="header">
+    <div class="menu-trigger"><a href="#"><i class="fa fa-bars"></i></a>
+    </div>
+  </div>
+</div>
+	
+	</body></html>
