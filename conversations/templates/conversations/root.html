@@ -339,7 +339,7 @@
         },
         data: {
           id: '{{ reply.id }}',
-          label: messageToLabel(messages[{{ forloop.counter0 }}]),
+          label: '{{ reply.user.username }}' + ": " + messageToLabel(messages[{{ forloop.counter0 }}]),
           user: '{{ reply.user.username }}',
           text: messages[{{ forloop.counter0 }}],
         }
