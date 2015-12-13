@@ -3,10 +3,9 @@
   // registers the extension on a cytoscape lib ref
   var register = function( cytoscape, $ ){
     if( !cytoscape ){ return; } // can't register if cytoscape unspecified
-
+    
     $.fn.cyPanzoom = $.fn.cytoscapePanzoom = function( options ){
       panzoom.apply( this, [ options ] );
-
       return this; // chainability
     };
 
@@ -15,7 +14,6 @@
       var cy = this;
 
       panzoom.apply( cy.container(), [ options ] );
-
       return this; // chainability
     });
 
