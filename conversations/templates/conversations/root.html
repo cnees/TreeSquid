@@ -25,58 +25,19 @@
       font-family: Arial, Verdana, sans-serif;
     }
 
-    #container {
-      background:url('http://i82.photobucket.com/albums/j279/qazfan/x_1.png') no-repeat center;
-      width:345px;
-      height:345px;
-    }
-    .node {
-      z-index:5;
-      transition:background 0.25s;
-      width:100px;
-      height:100px;
-      box-sizing:border-box;
-      background:#ccc;
-      font-size:small;
-      font-family:sans-serif;
-      overflow:hidden;
-      padding:10px;
-      border:10px solid #ccc;
-      word-wrap: break-word;
-      border-radius:5px;
-    }
-
-    #container .node {
-      display:inline-block;
-      margin:10px;
-      position:absolute;
-    }
-
-    .node-focus {
-      box-shadow:0 0 8px #000;
-      overflow:auto;
-      background:rgba(255,255,255,1);
-      width:260px;
-      height:260px;
-      z-index:10;
-      top:30px!important;
-      left:30px!important;
-    }
-    .user_0 {
-      background-color:#0f0!important;
-    }
-    button, textarea {
-      width:100%;
-    }
     #rootMessage {
       height:80px;
       max-width:250px;
       margin-bottom:5px;
     }
-      
-      a {
-      color: black;
+
+    a {
+      color:#4fbeff;
       text-decoration: none;
+    }
+
+    a:active {
+      color:#FFF;
     }
 
     .menu a:hover {
@@ -96,60 +57,47 @@
       margin-top:100px;
     }
 
-    .open {
-      left: 0;
-    }
-
-    .header {
-      position: relative;
-      margin: 30px 0;
-      text-align: center;
-    }
-
-    .links {
-      margin: 0 auto;
-    }
-
     .messageBox {
-    	width: 100%;
-		  height: 62px;
+      width: 100%;
+      height: 62px;
       padding-top:10px;
       padding-bottom:10px;
-    	background: #4fbeff;
+      background: #4fbeff;
       display:block;
-    	text-align: center;
-    	border: 1px;
-    	border-style: solid;
-    	border-color: #454554;
-    	margin-right:auto;
-    	margin-left:auto;
-    	text-decoration:none;
+      text-align: center;
+      border: 1px;
+      border-style: solid;
+      border-color: #454554;
+      margin-right:auto;
+      margin-left:auto;
+      text-decoration:none;
       overflow:auto;
       box-sizing:border-box;
     }
+
     .messageBox span {
       display:block;
     }
-	
-  	.topic {
-  		text-overflow:ellipsis;
-  		height: 20px;
-  		width: 220px;
-  		color:black;
-  		background-color:transparent;
-  		font-size:
-  	}
-  	
-  	.lastMessage {
-  		text-overflow:ellipsis;
-  		overflow:hidden;
-  		height: 20px;
-  		width: 220px;
-  		color:white;
-  		background-color:transparent;
-  	}
-  	
-  	#overlay {
+  
+    .topic {
+      text-overflow:ellipsis;
+      height: 20px;
+      width: 220px;
+      color:black;
+      background-color:transparent;
+      font-size:
+    }
+    
+    .lastMessage {
+      text-overflow:ellipsis;
+      overflow:hidden;
+      height: 20px;
+      width: 220px;
+      color:white;
+      background-color:transparent;
+    }
+    
+    #overlay {
       position:absolute;
       top:0;
       left:0;
@@ -157,58 +105,64 @@
       height:100%;
       background-color:rgba(0, 0, 0, 0.50);
       z-index:9999;
-	  display:none;
-  	}
+      display:none;
+    }
 
     .rectangle {
-    	width: 100%;
-    	height: 100px;
-    	margin-top: 0;
+      width: 100%;
+      height: 100px;
+      margin-top: 0;
     }
 
     .logo {
       z-index:500;
-    	color: #4fbeff;
-    	display:block;
-    	margin-right:auto;
-    	margin-left:auto;
-    	text-align:center;
-    	vertical-align: middle;
-    	margin-top: 0px;
-    	line-height: 150%;
+      color: #4fbeff;
+      display:block;
+      margin-right:auto;
+      margin-left:auto;
+      text-align:center;
+      vertical-align: middle;
+      margin-top: 0px;
+      line-height: 150%;
     }
 
     .handle {
-    	color: #4fbeff;
-    	margin-top: 0px;
-    	line-height: 0;
-    	position:absolute;
+      color: #4fbeff;
+      margin-top: 0px;
+      line-height: 0;
+      position:absolute;
       top:22px;
       right:22px;
       text-transform:capitalize;
     }
+
     #create-root {
       width:100%;
     }
-    #create-root textarea, #create-root button {
-  		width: 80%;
-  		height: 40px;
-  		margin-left:auto;
-  		margin-right:auto;
+
+    #create-root button {
+      width: 100%;
+      height: 40px;
+      margin-left:auto;
+      margin-right:auto;
+      display:block;
+      border:1px solid #ccc;
+      padding:10px;
+      background:#eee;
+    }
+    #create-root button:hover {
+      background:#fff;
+    }
+  
+    #createMessage input, #createMessage textarea , #create-root-button {
+      width: 80%;
+      height: 40px;
+      margin-left:auto;
+      margin-right:auto;
       display:block;
       border:1px solid #ccc;
       padding:10px;
     }
-	
-  	#createMessage input, #createMessage textarea , #create-root-button {
-  		width: 80%;
-  		height: 40px;
-  		margin-left:auto;
-  		margin-right:auto;
-      display:block;
-      border:1px solid #ccc;
-      padding:10px;
-  	}
 
     #createMessage textarea{
       height: 80px;
@@ -225,24 +179,34 @@
       padding:10px;
       display:none;
     }
-	
-  	#newConversation {
-    	display:inline-block;
+  
+    #newConversation {
+      display:inline-block;
     }
-    	
+      
     #exitOverlay {
-    	width: 40px; 
-    	height:40px;
-    	float:right;
-    	display:inline-block;
+      width: 40px; 
+      height:40px;
+      float:right;
+      display:inline-block;
       border:1px solid #ccc;
       padding:10px;
     }
+
+    #cy {
+      position:absolute;
+      top:0px;
+      left:250px;
+      width:calc(100% - 250px);
+      height:100%;
+      z-index:100;
+    }
+
   </style>
 </head>
 <body>
-	
-	<div id="overlay">
+  
+  <div id="overlay">
     <div id="createMessage">
       <button id="exitOverlay">X</button>
       <h2 id="newConversation">New Conversation</h2>
@@ -251,33 +215,33 @@
       <input type="text" name="friends" placeholder="Friends" id="friendsField"><br>
       <button id="create-root-button">Create</button><br>
     </div>
-	</div>
-	
-  <div id="cy" style="position:absolute;top:0px;left:250px;width:calc(100% - 250px);height:100%;z-index:100;"></div>
+  </div>
+  
+  <div id="cy"></div>
 
-	<div class="rectangle">
-		<h3 class="handle">{{ request.user.username }}</h3>
-		<h1 class="logo" style="font-family:'Lobster';font-size:65px;">TreeSquid</h1>
-	</div>
-	
-	</head>
-	<body>
-	
-	<div class="menu">
-	<div id="create-root">
+  <div class="rectangle">
+    <h3 class="handle" style="z-index:9000">{{ request.user.username }}&nbsp;&nbsp;-&nbsp;&nbsp;<a href="/logout/">Logout</a></h3>
+    <h1 class="logo" style="font-family:'Lobster';font-size:65px;">TreeSquid</h1>
+  </div>
+  
+  </head>
+  <body>
+  
+  <div class="menu">
+  <div id="create-root">
     <button id="createOverlay">New Conversation</button>
   </div>
   <br>
-	{% if latest_message_list %}
-		{% for message in latest_message_list %}
+  {% if latest_message_list %}
+    {% for message in latest_message_list %}
    <a href="/conversation/{{message.root_id}}" class="messageBox"><span>
-		<div class="topic">{{ message.topic }}</div>
-		<div class="lastMessage">{{ message.text }}</div>
+    <div class="topic">{{ message.topic }}</div>
+    <div class="lastMessage">{{ message.text }}</div>
    </span></a>
     {% endfor %}
-	{% else %}
-		<p>No conversations are available.</p>
-	{% endif %}
+  {% else %}
+    <p>No conversations are available.</p>
+  {% endif %}
 
 </div>
 </body>
@@ -337,8 +301,7 @@
           id: '{{ reply.id }}',
           label: messageToLabel(messages[{{ forloop.counter0 }}]),
           text: messages[{{ forloop.counter0 }}],
-        },
-        classes: 'user_0'
+        }
       },
       { // edge
         data: { id: '{{ reply.parent_id }}_{{ reply.id }}', source: '{{ reply.parent_id }}', target: '{{ reply.id }}' }
