@@ -139,7 +139,7 @@ def root(request, root_id):
     return render(request, 'conversations/root.html', {'latest_message_list': latest_message_list, 'root': root})
  
 def filterText(input):
-	return input.replace('"', r'\"').rstrip()
+	return input.replace('"', r"''").rstrip()
 
 @ajax
 def add_root(request):
