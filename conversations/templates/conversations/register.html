@@ -2,30 +2,91 @@
 <html>
     <head>
         <title>TreeSquid</title>
+        <style>
+            * {
+                box-sizing:border-box;
+            }
+
+            html, body {
+                margin: 0px;
+                padding: 10px;
+                font-family: helvetica, sans-serif;
+                color: #4fbeff;
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+                font-size: 1em;
+                line-height: 1.5em;
+                background: #454554;
+                font-family: Arial, Verdana, sans-serif;
+            }
+
+            #main {
+                width:350px;
+                margin-right:auto;
+                margin-left:auto;
+                text-align:center;
+            }
+
+            input, button{
+                width:200px!important;
+                height:40px!important;
+                padding:10px;
+                display:block;
+                margin-right:auto;
+                margin-left: auto;
+            }
+            .helptext {
+                display:block;
+                font-size:12px;
+                line-height:14px;
+                width:200px;
+                margin-top:5px;
+                margin-right:auto;
+                margin-left: auto;
+                text-align:center;
+            }
+            .center {
+                text-align:center;
+                margin-right:auto;
+                margin-left: auto;
+            }
+            .errorlist {
+                color:#fff;
+                list-style-type:none;
+                text-align:center;
+                padding:0;
+                margin-bottom:-15px;
+                padding-top:5px;
+                font-size:13px;
+                font-style:italic;
+            }
+        </style>
     </head>
 
     <body>
-        <h1>Register with TreeSquid</h1>
+        <div id="main">
+            <h1 class="center">TreeSquid</h1>
 
-        {% if registered %}
-        TreeSquid says: <strong>thank you for registering!</strong>
-        <a href="/">Return to the homepage.</a><br />
-        {% else %}
-        TreeSquid says: <strong>register here!</strong><br />
+            {% if registered %}
+            <strong>Thank you for registering!</strong>
+            <a href="/">Return to the homepage.</a><br />
+            {% else %}
 
-        <form id="user_form" method="post" action="/register/"
-                enctype="multipart/form-data">
+            <form id="user_form" method="post" action="/register/"
+                    enctype="multipart/form-data">
 
-            {% csrf_token %}
+                {% csrf_token %}
 
-            <!-- Display each form. The as_p method wraps each element in a paragraph
-                 (<p>) element. This ensures each element appears on a new line,
-                 making everything look neater. -->
-            {{ user_form.as_p }}
+                <!-- Display each form. The as_p method wraps each element in a paragraph
+                     (<p>) element. This ensures each element appears on a new line,
+                     making everything look neater. -->
+                {{ user_form.as_p }}
 
-            <!-- Provide a button to click to submit the form. -->
-            <input type="submit" name="submit" value="Register" />
-        </form>
-        {% endif %}
+                <!-- Provide a button to click to submit the form. -->
+                <p class="center"><button type="submit" name="submit">Register</button></p>
+            </form>
+            {% endif %}
+        </div>
     </body>
 </html>
