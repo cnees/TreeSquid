@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from conversations.models import User
 from django.shortcuts import get_object_or_404, render, render_to_response, redirect
 from django.db.models import F
 from django.template import RequestContext
@@ -65,7 +66,10 @@ def register(request):
 
             user = authenticate(username=request.POST['username'], password=request.POST['password'])
             login(request, user)
-            # TODO: come up with a better page to send new users to.
+
+            # Generate welcome conversation!
+            generate_welcome_conversation(user.id)
+
             return HttpResponseRedirect('/')
 
         # Invalid form - mistakes or something else?
@@ -182,7 +186,88 @@ def user_logout(request):
     logout(request)
 
     # Take the user back to the homepage.
-    return HttpResponseRedirect('/login/')
+    return HttpResponseRedirect('/login/')  
+
+# This function generates the welcome conversation between a new user and TreeSquid
+def generate_welcome_conversation(user_id):
+    # Get the TreeSquid user account
+    treesquid_user = User.objects.filter(username="TreeSquid")
+
+    # If it does not exist, create it
+    if treesquid_user.exists():
+        treesquid_user = treesquid_user[0]
+    else:
+        treesquid_user = User.objects.create_user('TreeSquid', 'treesquid@example.com', 'treesquid')
+        treesquid_user.first_name = "Team"
+        treesquid_user.last_name = "TreeSquid"
+        treesquid_user.save()
+
+
+    # Now, generate the conversation 
+    m = Message(text="Welcome!", user=treesquid_user, topic="This is TreeSquid")
+    m.save()
+    m16 = Message(text="About", user=treesquid_user, parent=m)
+    m16.save()
+    m17 = Message(text="TreeSquid is a nonlinear messaging platform. Conversations grow as trees.", user=treesquid_user, parent=m16)
+    m17.save()
+    m18 = Message(text="TreeSquid is one of the many names we proposed", user=treesquid_user, parent=m16)
+    m18.save()
+    m19 = Message(text="Built by Chris Loechli, Joe Pohlman, Brendan Killalea, and Clara Nees", user=treesquid_user, parent=m16)
+    m19.save()
+    m12 = Message(text="EECS 493, Fall 2015", user=treesquid_user, parent=m19)
+    m12.save()
+    m1 = Message(text="How to", user=treesquid_user, parent=m)
+    m1.save()
+    m2 = Message(text="Navigate", user=treesquid_user, parent=m1)
+    m2.save()
+    m3 = Message(text="Zoom", user=treesquid_user, parent=m2)
+    m3.save()
+    m4 = Message(text="Use two-finger or pinch zooming on a trackpad.", user=treesquid_user, parent=m3)
+    m4.save()
+    m5 = Message(text="Use the icons in the top left to zoom in and out", user=treesquid_user, parent=m3)
+    m5.save()
+    m6 = Message(text="Pan", user=treesquid_user, parent=m2)
+    m6.save()
+    m61 = Message(text="Click and drag the background to pan", user=treesquid_user, parent=m6)
+    m61.save()
+    m62 = Message(text="On a Mac trackpad, you can use three fingers to pan", user=treesquid_user, parent=m6)
+    m62.save()
+    m7 = Message(text="Pan with three fingers on a Mac trackpad", user=treesquid_user, parent=m6)
+    m7.save()
+    m7 = Message(text="Click and drag to pan", user=treesquid_user, parent=m6)
+    m7.save()
+    m8 = Message(text="Post", user=treesquid_user, parent=m)
+    m8.save()
+    m9 = Message(text="Click any message to reply to it.", user=treesquid_user, parent=m8)
+    m9.save()
+    m10 = Message(text="You can click and drag the bottom right corner of the text box as you type your reply to change its size.", user=treesquid_user, parent=m9)
+    m10.save()
+    m11 = Message(text="Create new conversations with the ''New Conversation'' button in the top left.", user=treesquid_user, parent=m8)
+    m11.save()
+    m12 = Message(text="See replies", user=treesquid_user, parent=m1)
+    m12.save()
+    m13 = Message(text="The left bar shows conversations you're part of.", user=treesquid_user, parent=m12)
+    m13.save()
+    m14 = Message(text="Click on a message in the tree to see its full contents.", user=treesquid_user, parent=m12)
+    m14.save()
+    m15 = Message(text="Replies from different users have different border colors.", user=treesquid_user, parent=m12)
+    m15.save()
+    m_chris_made1 = Message(text="This is what a reply made by you would look like", user_id=user_id, parent=m9)
+    m_chris_made1.save()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -196,4 +281,4 @@ def user_logout(request):
         # root_id = Message.objects.filter(root_id=F('id')).latest('id').id
  # Get the most recent message for the user
         # latest_message = Message.objects.filter(user_id=request.user.id).latest('id')
-    
+  
