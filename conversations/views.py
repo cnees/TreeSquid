@@ -146,16 +146,15 @@ def root(request, root_id):
     return render(request, 'conversations/root.html', {'latest_message_list': latest_message_list, 'root': root})
  
 def filterText(input):
-	return input.replace('"', r"''").rstrip()
+	return input.replace('"', r'\"').rstrip()
 
 @ajax
 def add_root(request):
   if request.method == 'POST':
     parse = urlparse.parse_qs(request.body)
     message = parse['message'][0]
-    topic = parse['topic'][0]
     user_id = request.user.id
-    reply = Message(text=filterText(message), user_id=user_id, topic=topic)
+    reply = Message(text=filterText(message), user_id=user_id)
     reply.save()
     return {'id': reply.id, 'text': reply.text}
 
@@ -165,6 +164,7 @@ def add_reply(request, root_id):
 		parse = urlparse.parse_qs(request.body)
 		node = parse['node'][0]
 		message = parse['message'][0]
+		print message
 		parent = Message.objects.get(id=node)
 		user_id = request.user.id
 		reply = Message(
@@ -196,3 +196,4 @@ def user_logout(request):
         # root_id = Message.objects.filter(root_id=F('id')).latest('id').id
  # Get the most recent message for the user
         # latest_message = Message.objects.filter(user_id=request.user.id).latest('id')
+    
