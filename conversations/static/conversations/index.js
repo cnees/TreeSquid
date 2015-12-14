@@ -107,6 +107,12 @@ $(function() {
     };
     cy.layout(layoutParams);
     cy.viewport(view);
+    //add reply's sidebar
+    var url = $(location).attr('href').split('/');
+    if (url[url.length - 1].length > 0) var root_id = url[url.length - 1];
+    else var root_id = url[url.length - 2];
+    var sidebarItem = $("#sidebar #" + root_id + " div.lastMessage");
+    sidebarItem.html(data['text']);
   }
 
   var replyToMessage = function(e) {
