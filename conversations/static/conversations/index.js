@@ -34,7 +34,6 @@ $(function() {
     name: 'breadthfirst',
     directed: true, // whether the tree is directed downwards (or edges can point in any direction if false)
     padding: 30, // padding on fit
-    'padding-left': 250,
     spacingFactor: 1.5, // positive spacing factor, larger => more space between nodes (N.B. n/a if causes overlap)
     animate: true, // whether to transition the node positions
   };
@@ -104,7 +103,7 @@ $(function() {
       pan: cy.pan()
     };
     cy.layout(layoutParams);
-    //cy.viewport(view);
+    cy.viewport(view);
   }
 
   var replyToMessage = function(e) {
@@ -190,17 +189,6 @@ $(function() {
     pixelRatio: 1
   });
 
-  var old_pan = cy.pan();
-  console.log(old_pan);
-  var cy_elt = $("#cy");
-  var x_offset = cy_elt.offset().left;
-  cy_elt.css({'width':'100%','left':'0px'});
-  cy.resize()
-  cy.pan({
-    x: old_pan.x + x_offset,
-    y: old_pan.y
-  });
-
   var defaults = {
     zoomFactor: 0.05, // zoom factor per zoom tick
     zoomDelay: 45, // how many ms between zoom ticks
@@ -222,7 +210,6 @@ $(function() {
   };
 
   cy.panzoom( defaults );
-  $(".cy-panzoom").css({'font-size':25,position:'absolute','top':20,'left':250,'height':80,'overflow-y':'hidden'})
   cy.nodes().forEach(function(n){
     setQTip(n);
   });

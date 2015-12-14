@@ -12,6 +12,19 @@
       box-sizing:border-box;
     }
 
+    .cy-panzoom {
+      font-size:25px;
+      position:absolute;
+      top:20px;
+      left:20px;
+      height:80px;
+      overflow-y:hidden;
+      color:#ccc;
+    }
+    .cy-panzoom span:hover {
+      color:#fff;
+    }
+
     #sidebar {
       z-index:10000;
       padding:10px;
@@ -23,6 +36,12 @@
       overflow-x:hidden;
       width:230px;
       color: #454554;
+      background:#393946;
+      box-shadow: 0 0 10px #000;
+    }
+
+    a:hover {
+      color:#fff;
     }
 
     button, input, textarea {
@@ -52,7 +71,7 @@
 
     #rootMessage {
       height:80px;
-      max-width:250px;
+      max-width:230px;
       margin-bottom:5px;
     }
 
@@ -80,6 +99,7 @@
       text-align: left;
       text-decoration:none;
       box-sizing:border-box;
+      overflow:hidden;
     }
     .messageBox:hover {
       background:#fff;
@@ -88,10 +108,10 @@
       display:block;
     }
 	
-	#currentMessage {
-	      background: #00a0ff;
-	}
-  
+  	#currentMessage {
+  	      background: #00a0ff;
+  	}
+    
     .topic {
       text-overflow:ellipsis;
       height: 20px;
@@ -126,11 +146,12 @@
       width: 100%;
       height: 100px;
       margin-top: 0;
+      text-shadow: 0 0 10px #000;
     }
 
     .logo {
-      font-family:'Lobster Two';
-      font-size:48px;
+      font-family:'Montserrat Alternates';
+      font-size:35px;
       z-index:500;
       color: #99CCCC;
       display:block;
@@ -139,6 +160,7 @@
       text-align:center;
       vertical-align: middle;
       margin-top: 15px;
+      text-shadow: 0 0 10px #000;
     }
 
     .handle {
@@ -149,6 +171,10 @@
       top:22px;
       right:22px;
       text-transform:capitalize;
+    }
+
+    #createOverlay, .messageBox {
+      box-shadow: 0 0 10px #000;
     }
 
     #createOverlay {
@@ -213,8 +239,8 @@
     #cy {
       position:absolute;
       top:0px;
-      left:250px;
-      width:calc(100% - 250px);
+      left:230px;
+      width:calc(100% - 230px);
       height:100%;
       z-index:100;
     }
@@ -228,7 +254,6 @@
       margin-top:-351px;
       margin-right:auto;
       margin-left:auto;
-      opacity:0.8;
       display:none;
     }
 
@@ -271,7 +296,7 @@
   </div>
 
   <div id="sidebar">
-  <div onclick="easteregg()"><h1 class="logo"><span style="letter-spacing:-5px;margin-left:-4px;">T</span>reeSquid</h1></div>
+    <div onclick="easteregg()"><h1 class="logo"><span style="color:#996633"><span style="letter-spacing:-2px;margin-left:-4px;">T</span>ree</span><span style="color:#339900;">Squid</span></h1></div>
     <button id="createOverlay">New Conversation</button>
     {% if latest_message_list %}
       {% for message in latest_message_list %}
@@ -314,7 +339,7 @@
   //   {% endfor %}
   // }
 
-  var colors = ['#99FFFF', '#339900', '#99CC99', '#80ABAB', '#989866', '#9999CC', '#000'];
+  var colors = ['#99CCCC', '#339900', '#99CC99', '#989866', '#9999CC', 'pink', 'purple'];
   // ['#99CCCC', 'blue', '#CCC', 'green', 'orange', 'pink', 'cyan', 'purple'];
   var userColors = {};
   var counter_i = 0;
