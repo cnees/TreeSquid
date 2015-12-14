@@ -111,21 +111,28 @@ $(function() {
     };
     cy.layout(layoutParams);
     cy.viewport(view);
+    //add reply's sidebar
+    var url = $(location).attr('href').split('/');
+    if (url[url.length - 1].length > 0) var root_id = url[url.length - 1];
+    else var root_id = url[url.length - 2];
+    var sidebarItem = $("#sidebar #" + root_id + " div.lastMessage");
+    sidebarItem.html(data['text']);
   }
 
   var replyToMessage = function(e) {
-	if ($ (e.target).parent().find("textarea:first").val()) {
-		var textBox = $(e.target).parent().find("textarea:first");
-		$("div").qtip("hide");
-		data = {
-			'node': textBox.attr("data-id"),
-			'message': textBox.val(),
-			'csrfmiddlewaretoken': csrf_,
-		};
-		$.post("/conversation/1/reply/", data, function(data){
-			addReply(e, data['content'], cy, layoutParams);
-		}, 'json');
-	}
+    var textBox = $(e.target).parent().find("textarea:first");
+    if($.trim( textBox.val() ) == '') {
+      return; // No  message
+    }
+    $("div").qtip("hide");
+    data = {
+        'node': textBox.attr("data-id"),
+        'message': textBox.val(),
+        'csrfmiddlewaretoken': csrf_,
+    };
+    $.post("/conversation/1/reply/", data, function(data){
+      addReply(e, data['content'], cy, layoutParams);
+    }, 'json');
   }
 
   $("body").on('click', '.reply-button', function(e) {replyToMessage(e);});
@@ -147,7 +154,7 @@ $(function() {
         style: {
           'border-opacity': 1,
           'border-style': 'solid',
-          'border-width': 3,
+          'border-width': 6,
           'width': 'label',
           'height': 'label',
           'shape': 'roundrectangle',
