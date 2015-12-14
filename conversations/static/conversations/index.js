@@ -146,7 +146,7 @@ $(function() {
           'padding-right': '10px',
           'padding-top': '10px',
           'padding-bottom': '10px',
-          'background-color': '#fff',
+          'background-color': '#FFF',
           'label': 'data(label)',
           'font-size': '12px',
           'text-halign': 'center',

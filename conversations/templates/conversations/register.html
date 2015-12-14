@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link href='https://fonts.googleapis.com/css?family=Montserrat+Alternates' rel='stylesheet' type='text/css'>
         <title>TreeSquid</title>
         <style>
             * {
@@ -11,7 +12,7 @@
                 margin: 0px;
                 padding: 10px;
                 font-family: helvetica, sans-serif;
-                color: #4fbeff;
+                color: #99CCCC;
                 width: 100%;
                 font-size: 1em;
                 line-height: 1.5em;
@@ -77,13 +78,29 @@
 				font-size:13.3333px
 
 			}
+
+            .logo {
+                font-family:'Montserrat Alternates';
+                font-size:35px;
+                z-index:500;
+                color: #99CCCC;
+                display:block;
+                margin-right:auto;
+                margin-left:auto;
+                text-align:center;
+                vertical-align: middle;
+                margin-top: 15px;
+                text-shadow: 0 0 10px #000;
+            }
         </style>
     </head>
 
     <body>
         <div id="main">
-            <h1 class="center">TreeSquid</h1>
+            <h1 class="logo"><span style="color:#996633"><span style="letter-spacing:-2px;margin-left:-4px;">T</span>ree</span><span style="color:#339900;">Squid</span></h1>
 
+            
+            <h2>Register</h2>
             {% if registered %}
             <strong>Thank you for registering!</strong>
             <a href="/">Return to the homepage.</a><br />
@@ -101,10 +118,10 @@
 
                 <!-- Provide a button to click to submit the form. -->
                 <p class="center"><button type="submit" name="submit">Register</button></p>
-                
             </form>
+            <p>Already have an account?<br><a href="/login/"><button>Login</button></a></p>
+
             {% endif %}
-            <a href="/login/"><button>Login</button></a>
         </div>
     </body>
 </html>

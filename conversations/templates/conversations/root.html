@@ -3,7 +3,7 @@
 <head>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <link rel="stylesheet" href="{% static 'conversations/cytoscape-panzoom/font-awesome-4.0.3/css/font-awesome.css' %}")>
-  <link href='https://fonts.googleapis.com/css?family=Lobster+Two:400italic' rel='stylesheet' type='text/css'>
+  <!--<link href='https://fonts.googleapis.com/css?family=Lobster+Two:400italic' rel='stylesheet' type='text/css'>-->
   <link href='https://fonts.googleapis.com/css?family=Montserrat+Alternates' rel='stylesheet' type='text/css'>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>TreeSquid</title>
@@ -47,6 +47,11 @@
     button, input, textarea {
       font-family: 'Montserrat Alternates', sans-serif;
     }
+
+    a[href='/conversation/{{root.id}}'] {
+      background-color:#fff!important;
+    }
+    
     html, body {
       margin: 0px;
       padding: 0px;
@@ -162,6 +167,10 @@
       margin-top: 15px;
       text-shadow: 0 0 10px #000;
     }
+    .logo:hover {
+      text-shadow: 0 0 10px #000;
+      text-shadow: 0 0 15px #000;
+    }
 
     .handle {
       color: #99CCCC;
@@ -219,6 +228,7 @@
       margin-top:100px;
       padding:10px;
       display:none;
+      box-shadow: 0 0 15px #000;
     }
   
     #newConversation {

@@ -3,7 +3,10 @@
 <html>
     <head>
         <!-- Is anyone getting tired of repeatedly entering the header over and over?? -->
+        <!-- Yeah, maybe a little. Cleaner code is on the list of things to do after the deadline -->
         <title>TreeSquid</title>
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Montserrat+Alternates' rel='stylesheet' type='text/css'>
     </head>
 	
 	<style>
@@ -14,10 +17,11 @@
 	font-family:icon;
 }
 	
-	body{
+body{
 	background:#454554;
 	font-family:'Open Sans';
 }
+
 label{
 	font-family:icon;
 	text-shadow:0 -1px 0 #666;
@@ -27,9 +31,6 @@ label{
 	width:230px;
 	height:113px;
 	margin:auto;
-}
-#block{
-	margin-top:100px;
 }
 #block:before{
 	content:'';
@@ -198,20 +199,45 @@ input::-webkit-validation-bubble-arrow {
 	position:absolute;
 	margin:-23px 178px;
 }
+.logo {
+  font-family:'Montserrat Alternates';
+  font-size:35px;
+  z-index:500;
+  color: #99CCCC;
+  display:block;
+  margin-right:auto;
+  margin-left:auto;
+  text-align:center;
+  vertical-align: middle;
+  margin-top: 15px;
+  text-shadow: 0 0 10px #000;
+}
+#register {
+	text-align: center;
+}
+a {
+	text-decoration: none;
+	color: #99CCCC;
+}
+a:hover{
+	color:#fff;
+}
 	</style>
 
     <body>
-
+    	<h1 class="logo"><span style="color:#996633"><span style="letter-spacing:-2px;margin-left:-4px;">T</span>ree</span><span style="color:#339900;">Squid</span></h1>
+    	<p id="register"><a href="/register">Click here to Register</a></p>
         <form id="login_form" method="post" action="/login/">
 		            {% csrf_token %}
 	<div id="block">
 		<label id="user" for="name">p</label>
-		<input type="text" name="username" id="name" placeholder="Username" value="" required/>
+		<input type="text" name="username" id="name" placeholder="Username" value="guest" required/>
 		<label id="pass" for="password">k</label>
-		<input type="password" name="password" id="password" placeholder="Password" value="" required />
+		<input type="password" name="password" id="password" placeholder="Password" value="guest" required />
 		<input type="submit" id="submit" name="submit" value="a"/>
 	</div>
         </form>
+        
 
     </body>
 </html>
