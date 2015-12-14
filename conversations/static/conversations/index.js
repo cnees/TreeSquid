@@ -85,8 +85,8 @@ $(function() {
       group: "nodes",
       data: {
         id: data['id'],
-        text: data['text'],
-        label: data['text'],
+        text: data['user'] + ': ' + data['text'],
+        label: data['user'] + ': ' + data['text'],
       },
       renderedPosition: {x: e.originalEvent.clientX - $("#cy").offset().left, y: e.originalEvent.clientY - $("#cy").offset().top},
     });
