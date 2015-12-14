@@ -1,9 +1,10 @@
 {% load staticfiles %}
 <html>
 <head>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <link rel="stylesheet" href="{% static 'conversations/cytoscape-panzoom/font-awesome-4.0.3/css/font-awesome.css' %}")>
-  <link href='https://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lobster+Two:400italic' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Montserrat+Alternates' rel='stylesheet' type='text/css'>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>TreeSquid</title>
   <style>
@@ -12,28 +13,32 @@
     }
 
     #sidebar {
+      z-index:10000;
       padding:10px;
       position:absolute;
       top:0px;
       left:0px;
       height:100%;
-      overflow:auto;
-      width:150px;
+      overflow-y:auto;
+      overflow-x:hidden;
+      width:230px;
       color: #454554;
     }
 
+    button, input, textarea {
+      font-family: 'Montserrat Alternates', sans-serif;
+    }
     html, body {
       margin: 0px;
       padding: 0px;
-      font-family: helvetica, sans-serif;
-      color: black;
+      font-family: 'Montserrat Alternates', sans-serif;
+      color: #fff;
       height: 100%;
       width: 100%;
       overflow: hidden;
       font-size: 1em;
       line-height: 1.5em;
       background: #454554;
-      font-family: Arial, Verdana, sans-serif;
     }
 
     .qtip-content textarea, .qtip-content button {
@@ -60,24 +65,6 @@
       color:#FFF;
     }
 
-    .menu a:hover {
-      opacity: 0.5;
-      text-decoration:none;
-      color:black;
-    }
-
-    .menu {
-      height: 100%;
-      width: 250px;
-      background: #454554;;
-      position: absolute;
-      top: 0;
-      left: 0%;
-      text-align: center;
-      margin-top:100px;
-	  margin-bottom: 100px;
-    }
-	
   	.boxContain {
     	display:block;
     	height:calc(100% - 165px);
@@ -86,21 +73,17 @@
 
     .messageBox {
       width: 100%;
-      height: 62px;
-      padding-top:10px;
-      padding-bottom:10px;
-      background: #99CCCC;
+      padding: 10px;
+      margin-bottom:10px;
+      background: #ccc;
       display:block;
-      text-align: center;
-      border: 1px;
-      border-style: solid;
-      border-color: #454554;
-      margin-right:auto;
-      margin-left:auto;
+      text-align: left;
       text-decoration:none;
       box-sizing:border-box;
     }
-
+    .messageBox:hover {
+      background:#fff;
+    }
     .messageBox span {
       display:block;
     }
@@ -109,9 +92,8 @@
       text-overflow:ellipsis;
       height: 20px;
       width: 220px;
-      color:black;
+      color:#454554;
       background-color:transparent;
-      font-size:
     }
     
     .lastMessage {
@@ -119,7 +101,9 @@
       overflow:hidden;
       height: 20px;
       width: 220px;
-      color:white;
+      color:#454554;
+      font-style:italic;
+      font-size:smaller;
       background-color:transparent;
     }
     
@@ -141,8 +125,8 @@
     }
 
     .logo {
-      font-family:'Lobster';
-      font-size:65px;
+      font-family:'Lobster Two';
+      font-size:48px;
       z-index:500;
       color: #99CCCC;
       display:block;
@@ -150,7 +134,7 @@
       margin-left:auto;
       text-align:center;
       vertical-align: middle;
-      margin-top: 0px;
+      margin-top: 15px;
     }
 
     .handle {
@@ -163,22 +147,22 @@
       text-transform:capitalize;
     }
 
-    #create-root {
-      width:100%;
-    }
-
-    #create-root button {
+    #createOverlay {
       width: 100%;
       height: 40px;
       margin-left:auto;
       margin-right:auto;
+      margin-bottom:10px;
       display:block;
-      border:1px solid #ccc;
       padding:10px;
-      background:#eee;
-    }
-    #create-root button:hover {
       background:#fff;
+      border:none;
+      font-size: 1em;
+      color:#454554;
+    }
+    #createOverlay:hover {
+      background:#fff;
+      color:black;
     }
   
     #createMessage input, #createMessage textarea , #create-root-button {
@@ -208,7 +192,9 @@
     }
   
     #newConversation {
-      /*display:inline-block;*/
+      color:#454554;
+      padding-left:50px;
+      background:#fff;
     }
       
     #exitOverlay {
@@ -229,6 +215,19 @@
       z-index:100;
     }
 	
+    #treesquid {
+      height:703px;
+      position:absolute;
+      top:50%;
+      left:50%;
+      margin-left:-242px;
+      margin-top:-351px;
+      margin-right:auto;
+      margin-left:auto;
+      opacity:0.8;
+      display:none;
+    }
+
   	::-webkit-scrollbar {
   		width: 12px;
   	}
@@ -244,7 +243,7 @@
   	::-webkit-scrollbar-thumb {
   		-webkit-border-radius: 10px;
   		border-radius: 10px;
-  		background: rgba(255,255,255,0.8); 
+  		background: rgba(0,0,0,0.1); 
   		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
   	}
 
@@ -254,6 +253,7 @@
   </style>
 </head>
 <body>
+  <img src="http://i82.photobucket.com/albums/j279/qazfan/treesquid.png" id="treesquid">
   
   <div id="overlay">
     <div id="createMessage">
@@ -261,12 +261,14 @@
       <h2 id="newConversation">New Conversation</h2>
       <input type="text" name="topic" placeholder="Topic" id="topicField"><br>
       <textarea name="rootMessage" placeholder="Message" id="messageField"></textarea><br>
-      <input type="text" name="friends" placeholder="Friends" id="friendsField"><br>
+      <!--<input type="text" name="friends" placeholder="Friends" id="friendsField"><br>-->
       <button id="create-root-button">Create</button><br>
     </div>
   </div>
 
   <div id="sidebar">
+  <div onclick="easteregg()"><h1 class="logo"><span style="letter-spacing:-5px;margin-left:-4px;">T</span>reeSquid</h1></div>
+    <button id="createOverlay">New Conversation</button>
     {% if latest_message_list %}
       {% for message in latest_message_list %}
         <a href="/conversation/{{message.root_id}}" class="messageBox"><span>
@@ -283,21 +285,15 @@
 
   <div class="top-bar">
     <h3 class="handle" style="z-index:9000">{{ request.user.username }}&nbsp;&nbsp;-&nbsp;&nbsp;<a href="/logout/">Logout</a></h3>
-    <h1 class="logo">TreeSquid</h1>
   </div>
   
   </head>
   <body>
   
-  <div class="menu">
-  <div id="create-root">
-    <button id="createOverlay">New Conversation</button>
-  </div>
+  
   <br>
-</div>
 </body>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 
 <script>
   var csrf_ = '{{ csrf_token }}';
@@ -319,11 +315,9 @@
   var userColors = {};
   var counter_i = 0;
   var color = function(userId) {
-    console.log("Color - " + userId);
     if(!(userId in userColors)) {
       userColors[userId] = colors[counter_i];
       counter_i += 1;
-      console.log(counter_i);
       if (counter_i >= colors.length) {
         console.log("We ran out of colors for the number of users. We will now repeat");
         counter_i = 0;
@@ -360,6 +354,10 @@
       },
     {% endfor %}
   ]
+
+  function easteregg() {
+    $('#treesquid').toggle();
+  }
 
 </script>
 <script src="{% static 'conversations/cytoscape.js' %}"></script>
