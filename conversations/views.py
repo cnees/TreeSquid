@@ -157,8 +157,9 @@ def add_root(request):
   if request.method == 'POST':
     parse = urlparse.parse_qs(request.body)
     message = parse['message'][0]
+    topic = parse['topic'][0]
     user_id = request.user.id
-    reply = Message(text=filterText(message), user_id=user_id)
+    reply = Message(text=filterText(message), user_id=user_id, topic=topic)
     reply.save()
     return {'id': reply.id, 'text': reply.text}
 
