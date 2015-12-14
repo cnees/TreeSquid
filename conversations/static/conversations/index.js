@@ -82,6 +82,9 @@ $(function() {
 
   var addReply = function(e, data, cy, layoutParams){
     var n = cy.add({
+      style: {
+        'border-color': color(data['user_id']),
+      },
       group: "nodes",
       data: {
         id: data['id'],
