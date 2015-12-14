@@ -111,6 +111,9 @@ $(function() {
 
   var replyToMessage = function(e) {
     var textBox = $(e.target).parent().find("textarea:first");
+    if($.trim( textBox.val() ) == '') {
+      return; // No  message
+    }
     $("div").qtip("hide");
     data = {
         'node': textBox.attr("data-id"),
@@ -141,7 +144,7 @@ $(function() {
         style: {
           'border-opacity': 1,
           'border-style': 'solid',
-          'border-width': 3,
+          'border-width': 6,
           'width': 'label',
           'height': 'label',
           'shape': 'roundrectangle',
