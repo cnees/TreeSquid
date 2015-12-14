@@ -178,7 +178,7 @@ def add_reply(request, root_id):
 			root=parent.root,
 			user_id=user_id)
 		reply.save()
-		return {'id': reply.id, 'text': reply.text, 'parent_id': parent.id}
+		return {'id': reply.id, 'text': reply.text, 'parent_id': parent.id, 'user': User.objects.get(id=user_id).username}
 
 # Use the login_required() decorator to ensure only those logged in can access the view.
 @login_required
