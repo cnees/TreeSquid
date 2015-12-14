@@ -6,13 +6,17 @@ function contract() {
   $(this).removeClass("node-focus", 150);
 }
 
+function eraseText(ID) {
+	$('[data-id='ID']').val('');
+}
+
 function setQTip(n) {
   n.qtip({
     content: [
 	  n.data('user'),
 	  "<br>",
       n.data('text').replace(/\r?\n/g, '<br />'),
-      "<br><textarea data-id='" + n.data("id") + "' placeholder='Reply'></textarea><br><button class='reply-button' id='reply_" + n.data("id") + "'>Reply</button>"
+      "<br><textarea data-id='" + n.data("id") + "' placeholder='Reply'></textarea><br><button onclick='eraseText(" + n.data("id") + ")' class='reply-button' id='reply_" + n.data("id") + "'>Reply</button>"
     ],
     position: {
       my: 'top center',
