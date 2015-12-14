@@ -110,16 +110,18 @@ $(function() {
   }
 
   var replyToMessage = function(e) {
-    var textBox = $(e.target).parent().find("textarea:first");
-    $("div").qtip("hide");
-    data = {
-        'node': textBox.attr("data-id"),
-        'message': textBox.val(),
-        'csrfmiddlewaretoken': csrf_,
-    };
-    $.post("/conversation/1/reply/", data, function(data){
-      addReply(e, data['content'], cy, layoutParams);
-    }, 'json');
+	if ($ (e.target).parent().find("textarea:first").val()) {
+		var textBox = $(e.target).parent().find("textarea:first");
+		$("div").qtip("hide");
+		data = {
+			'node': textBox.attr("data-id"),
+			'message': textBox.val(),
+			'csrfmiddlewaretoken': csrf_,
+		};
+		$.post("/conversation/1/reply/", data, function(data){
+			addReply(e, data['content'], cy, layoutParams);
+		}, 'json');
+	}
   }
 
   $("body").on('click', '.reply-button', function(e) {replyToMessage(e);});
