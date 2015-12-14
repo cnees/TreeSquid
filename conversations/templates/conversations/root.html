@@ -310,7 +310,7 @@
     <button id="createOverlay">New Conversation</button>
     {% if latest_message_list %}
       {% for message in latest_message_list %}
-        <a href="/conversation/{{message.root_id}}" class="messageBox"><span>
+        <a id="{{ message.root_id }}" href="/conversation/{{message.root_id}}" class="messageBox"><span>
           <div class="topic">{{ message.topic }}</div>
           <div class="lastMessage">{{ message.text }}</div>
         </span></a>
