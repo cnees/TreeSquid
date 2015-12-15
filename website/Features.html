@@ -210,11 +210,41 @@
 	 
 	 .pictureBox {
 		background:white;
-		height: 500px;
-		width: 888px;
 		margin-top:50px;
-		margin-right:auto;
+	 }
+	 
+	 .pageWrapper {
+		height:100%;
+		width:calc(100% - 230px);
+		margin-left:230px;
+		overflow-y:scroll;
+		overflow-x:hidden;
+	 }
+	 
+	 #registration {
+		width:200px;
+		height:400px;
 		margin-left:auto;
+		margin-right:auto;
+	 }
+	 
+	 #login {
+		width:400px;
+		height:400px;
+		margin-left:auto;
+		margin-right:auto;
+	 }
+	 #conversation {
+		width:400px;
+		height:400px;
+		margin-left:auto;
+		margin-right:auto;
+	 }
+	 #sidebarPage {
+		width:200px;
+		height:400px;
+		margin-left:auto;
+		margin-right:auto;
 	 }
   </style>
 </head>
@@ -233,12 +263,32 @@
           <div class="topic">Features</div>
         </span></a>
   </div>
-  
-  </head>
-  <body>
-  
-  
-  <br>
+	<div class="pageWrapper">
+	<div class="DescriptionBox"> 
+		<p>Registration Page</p>
+	</div>
+	<div class="pictureBox" id="registration">
+		<img src="registration.jpg" alt="Registration Page" style="height:400px;width:200px;padding:2px;border-color:white;border:2px;">
+	</div>
+	<div class="DescriptionBox"> 
+		<p>Login Page</p>
+	</div>
+	<div class="pictureBox" id="login">
+		<img src="loginPic.jpg" alt="Login Page" style="height:400px;width:400px;padding:2px;border-color:white;border:2px;">
+	</div>
+	<div class="DescriptionBox"> 
+		<p>Messages</p>
+	</div>
+	<div class="pictureBox" id="conversation">
+		<img src="Conversation.jpg" alt="Conversation Picture" style="height:400px;width:400px;padding:2px;border-color:white;border:2px;">
+	</div>
+	<div class="DescriptionBox"> 
+		<p>Sidebar</p>
+	</div>
+	<div class="pictureBox" id="sidebarPage">
+		<img src="sidebar.jpg" alt="Sidebar Picture" style="height:400px;width:200px;padding:2px;border-color:white;border:2px;">
+	</div>
+	<div>
 </body>
 
 
