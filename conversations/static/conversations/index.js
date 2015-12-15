@@ -7,7 +7,7 @@ function contract() {
 }
 
 function eraseText(ID) {
-	$('[data-id='ID']').val('');
+//	$('[data-id='ID']').val('');
 }
 
 function setQTip(n) {
