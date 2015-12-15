@@ -14,7 +14,6 @@
       position:absolute;
       top:0px;
       left:0px;
-      height:100%;
       overflow-y:auto;
       overflow-x:hidden;
       width:230px;
@@ -57,11 +56,11 @@
     a:active {
       color:#FFF;
     }
-  	.boxContain {
-    	display:block;
-    	height:calc(100% - 165px);
-    	overflow-y:auto;
-  	}
+    .boxContain {
+      display:block;
+      height:calc(100% - 165px);
+      overflow-y:auto;
+    }
     .messageBox {
       width: 100%;
       padding: 10px;
@@ -79,10 +78,10 @@
     .messageBox span {
       display:block;
     }
-	
-  	#currentMessage {
-  	      background: #00a0ff;
-  	}
+  
+    #currentMessage {
+          background: #00a0ff;
+    }
     
     .topic {
       text-overflow:ellipsis;
@@ -161,7 +160,7 @@
       background:#fff;
     }
       
-	
+  
     #treesquid {
       height:703px;
       position:absolute;
@@ -173,48 +172,69 @@
       margin-left:auto;
       display:none;
     }
-  	::-webkit-scrollbar {
-  		width: 12px;
-  	}
+    ::-webkit-scrollbar {
+      width: 12px;
+    }
    
-  	/* Track */
-  	::-webkit-scrollbar-track {
-  		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-  		-webkit-border-radius: 10px;
-  		border-radius: 10px;
-  	}
+    /* Track */
+    ::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+    }
    
-  	/* Handle */
-  	::-webkit-scrollbar-thumb {
-  		-webkit-border-radius: 10px;
-  		border-radius: 10px;
-  		background: rgba(0,0,0,0.1); 
-  		-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
-  	}
-  	::-webkit-scrollbar-thumb:window-inactive {
-  		background: rgba(255,255,255,0.8);; 
-	 }
-	 
-	 .DescriptionBox {
-		text-overflow:wrap;
-		vertical-align:top;
-		text-align:center;
-		background: #ccc;
-		color: #454554;
-		width: 600px;
-		margin-left: auto;
-		margin-right:auto;
-		margin-top: 73px;
-	 }
-	 
-	 .pictureBox {
-		background:white;
-		height: 500px;
-		width: 888px;
-		margin-top:50px;
-		margin-right:auto;
-		margin-left:auto;
-	 }
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+      -webkit-border-radius: 10px;
+      border-radius: 10px;
+      background: rgba(0,0,0,0.1); 
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+    }
+    ::-webkit-scrollbar-thumb:window-inactive {
+      background: rgba(255,255,255,0.8);; 
+    }
+   
+    #content {
+      width:calc(100% - 250px);
+      position:absolute;
+      top:0px;
+      left:250px;
+    }
+ 
+    .DescriptionBox {
+     text-overflow:wrap;
+     vertical-align:top;
+     text-align:center;
+     background: #ccc;
+     color: #454554;
+     width: 600px;
+     margin-left: auto;
+     margin-right:auto;
+     margin-top: 73px;
+    }
+
+    .DescriptionBox img {
+      max-width:100%;
+      border:10px solid #ccc;
+    }
+
+    ol, ul  {
+      text-align:left;
+    }
+
+    span.img {
+      background:#454554;
+      width:100%;
+    }
+    
+    .pictureBox {
+     background:white;
+     height: 500px;
+     width: 888px;
+     margin-top:50px;
+     margin-right:auto;
+     margin-left:auto;
+    }
   </style>
 </head>
 <body>
@@ -225,17 +245,46 @@
         <a href="websiteIndex.html" class="messageBox"><span>
           <div class="topic">Home</div>
         </span></a>
-		<a href="HowItWorks.html" class="messageBox"><span>
+    <a href="HowItWorks.html" class="messageBox"><span>
           <div class="topic">How it Works</div>
         </span></a>
-		<a href="Features.html" class="messageBox"><span>
+    <a href="Features.html" class="messageBox"><span>
           <div class="topic">Features</div>
         </span></a>
   </div>
+  <div id="content">
+    <div class="DescriptionBox"><br>
+      <h2>Making a conversation</h2>
+      <ol>
+        <li>Click "New Conversation" in the top left</li>
+        <li>Enter a topic</li>
+        <li>Enter a message</li>
+        <li>Click "Create"</li>
+      </ol>
+      <span class='img'><img src="createconversation.png"></span>
+      <h2>Replying</h2>
+      <ol>
+        <li>Click on any message to reply to it</li>
+        <li>Enter a response</li>
+        <li>Click submit</li>
+      </ol>
+      <span class='img'><img src="reply.png"></span>
+      <h2>Navigating</h2>
+      <ul>
+        <li>Click and drag the background to pan</li>
+        <li>Zoom in and out with the '+' and '-' buttons in the upper right</li>
+        <li>Zoom and out with a trackpad or scroll wheel</li>
+        <li>Reset zoom with the diagonal arrow icon in the upper right</li>
+      </ul>
+      <span class='img'><img src="nav.png"></span>
+      
+    </div>
+  </div>
+  </head>
+  <body>
   
-  <div class="DescriptionBox">
-	</div>
   
+  <br>
 </body>
 
 
