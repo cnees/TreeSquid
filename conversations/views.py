@@ -37,6 +37,7 @@ def index(request):
     else:
         return redirect('/register/')
 
+@login_required
 def about(request):
     return render(request, 'conversations/about.html')
 
@@ -152,6 +153,7 @@ def root(request, root_id):
 def filterText(input):
 	return input.replace('"', r'\"').rstrip()
 
+@login_required
 @ajax
 def add_root(request):
   if request.method == 'POST':
@@ -163,6 +165,7 @@ def add_root(request):
     reply.save()
     return {'id': reply.id, 'text': reply.text}
 
+@login_required
 @ajax
 def add_reply(request, root_id):
 	if request.method == 'POST':
