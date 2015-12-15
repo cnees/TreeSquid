@@ -11,9 +11,10 @@
     #sidebar {
       z-index:10000;
       padding:10px;
-      position:absolute;
+      position:fixed;
       top:0px;
       left:0px;
+      height:100%;
       overflow-y:auto;
       overflow-x:hidden;
       width:230px;
@@ -159,8 +160,14 @@
       padding-left:50px;
       background:#fff;
     }
-      
-	
+     
+    #content {
+      width:calc(100% - 250px);
+      position:absolute;
+      top:0px;
+      left:250px;
+    }
+
     #treesquid {
       height:703px;
       position:absolute;
@@ -231,15 +238,15 @@
           <div class="topic">Features</div>
         </span></a>
   </div>
-  
-  <div class="DescriptionBox">
-	<p> TreeSquid is a messaging application that lets you communicate with multiple people in a non-linear format. In TreeSquid, users can reply to messages directly, rather than throwing a comment into a continuous stream cluttered by too many people. This helps users navigate large conversations, and diverge into multiple sub-conversations. Messages are displayed in a conversation tree-graph, where messages are the leafs on the tree. Directed arrows show the user how one thought leads to many others message. 
-	</p>
-	</div>
-	<div class="pictureBox">
-		<img src="messagePic.jpg" alt="Message Pic" style="height:500px;width:888;padding:2px;">
+  <div id="content">
+    <div class="DescriptionBox">
+  	<p> TreeSquid is a messaging application that lets you communicate with multiple people in a non-linear format. In TreeSquid, users can reply to messages directly, rather than throwing a comment into a continuous stream cluttered by too many people. This helps users navigate large conversations, and diverge into multiple sub-conversations. Messages are displayed in a conversation tree-graph, where messages are the leafs on the tree. Directed arrows show the user how one thought leads to many others message. 
+  	</p>
+  	</div>
+  	<div class="pictureBox">
+  		<img src="messagePic.jpg" alt="Message Pic" style="height:500px;width:888;padding:2px;">
+    </div>
   </div>
-  
 </body>
 
 

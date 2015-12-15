@@ -11,9 +11,10 @@
     #sidebar {
       z-index:10000;
       padding:10px;
-      position:absolute;
+      position:fixed;
       top:0px;
       left:0px;
+      height:100%;
       overflow-y:auto;
       overflow-x:hidden;
       width:230px;
@@ -43,7 +44,6 @@
       background: #454554;
     }
     
-    }
     #rootMessage {
       height:80px;
       max-width:230px;
@@ -277,6 +277,14 @@
         <li>Reset zoom with the diagonal arrow icon in the upper right</li>
       </ul>
       <span class='img'><img src="nav.png"></span>
+      <h2>Picking a Conversation</h2>
+      <ul>
+        <li>Conversations you've participated in are on the left beneath the "New Conversation" button</li>
+        <li>The current conversation is highlighted</li>
+        <li>The first line shows the conversation topic</li>
+        <li>The second line shows a preview of the last message you posted in the conversation</li>
+      </ul>
+      <span class='img'><img src="conversations.png"></span>
       
     </div>
   </div>
