@@ -16,7 +16,7 @@ function setQTip(n) {
 	  n.data('user'),
 	  "<br>",
       n.data('text').replace(/\r?\n/g, '<br />'),
-      "<br><textarea data-id='" + n.data("id") + "' placeholder='Reply'></textarea><br><button onclick='eraseText(" + n.data("id") + ")' class='reply-button' id='reply_" + n.data("id") + "'>Reply</button>"
+      "<br><textarea class='reply-box' data-id='" + n.data("id") + "' placeholder='Reply'></textarea><br><button onclick='eraseText(" + n.data("id") + ")' class='reply-button' id='reply_" + n.data("id") + "'>Reply</button>"
     ],
     position: {
       my: 'top center',
@@ -120,6 +120,7 @@ $(function() {
   }
 
   var replyToMessage = function(e) {
+    console.log("replyingToMessage");
     var textBox = $(e.target).parent().find("textarea:first");
     if($.trim( textBox.val() ) == '') {
       return; // No  message
@@ -132,10 +133,18 @@ $(function() {
     };
     $.post("/conversation/1/reply/", data, function(data){
       addReply(e, data['content'], cy, layoutParams);
+      textBox.val('');
     }, 'json');
   }
 
   $("body").on('click', '.reply-button', function(e) {replyToMessage(e);});
+
+  $("body").on('keypress', '.reply-box', function(e) {
+    if (e.keyCode == 13 && !e.shiftKey) {
+      replyToMessage(e);
+      return false;
+    }
+  });
 
   $(".node").focus(expand);
   $(".node").blur(contract);
