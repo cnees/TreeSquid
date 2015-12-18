@@ -38,7 +38,7 @@ $(function() {
     name: 'breadthfirst',
     directed: true, // whether the tree is directed downwards (or edges can point in any direction if false)
     padding: 30, // padding on fit
-    spacingFactor: 1.5, // positive spacing factor, larger => more space between nodes (N.B. n/a if causes overlap)
+    spacingFactor: 1.1, // positive spacing factor, larger => more space between nodes (N.B. n/a if causes overlap)
     animate: true, // whether to transition the node positions
   };
 
@@ -199,7 +199,7 @@ $(function() {
       directed: true, // whether the tree is directed downwards (or edges can point in any direction if false)
       padding: 30, // padding on fit
       'padding-left': 250,
-      spacingFactor: 1.5, // positive spacing factor, larger => more space between nodes (N.B. n/a if causes overlap)
+      spacingFactor: 1.1, // positive spacing factor, larger => more space between nodes (N.B. n/a if causes overlap)
       animate: false, // whether to transition the node positions
     },
 
