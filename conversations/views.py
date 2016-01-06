@@ -26,7 +26,7 @@ def index(request):
 
         # If the user has not made any messages yet, will send the empty list
         if not latest_message:
-            return render(request, 'conversations/root.html')
+            return render(request, 'conversations/root.html', content_type="text/html")
 
         # Else, show them the conversation graph to which they most recently contributed.
         root_id = latest_message[0].root_id
@@ -148,7 +148,7 @@ def root(request, root_id):
             seen_root_ids.append(m.root_id)
             latest_message_list.append(m)
 
-    return render(request, 'conversations/root.html', {'latest_message_list': latest_message_list, 'root': root})
+    return render(request, 'conversations/root.html', {'latest_message_list': latest_message_list, 'root': root}, content_type="text/html")
  
 def filterText(input):
 	return input.replace('"', r'\"').rstrip()

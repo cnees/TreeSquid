@@ -120,7 +120,6 @@ $(function() {
   }
 
   var replyToMessage = function(e) {
-    console.log("replyingToMessage");
     var textBox = $(e.target).parent().find("textarea:first");
     if($.trim( textBox.val() ) == '') {
       return; // No  message
