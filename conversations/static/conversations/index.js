@@ -34,6 +34,8 @@ function setQTip(n) {
 
 $(function() {
 
+  console.log("index.js loaded");
+
   var layoutParams = {
     name: 'breadthfirst',
     directed: true, // whether the tree is directed downwards (or edges can point in any direction if false)
